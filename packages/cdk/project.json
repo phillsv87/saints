@@ -3,55 +3,46 @@
   "sourceRoot": "packages/cdk/src",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/packages/cdk",
-        "main": "packages/cdk/src/main.ts",
-        "tsConfig": "packages/cdk/tsconfig.app.json",
-        "assets": ["packages/cdk/src/assets"]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "packages/cdk/src/environments/environment.ts",
-              "with": "packages/cdk/src/environments/environment.prod.ts"
-            }
-          ]
+    "deploy":{
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
         }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/cdk",
+        "command": "cdk deploy --profile strapped"
       }
     },
-    "serve": {
-      "executor": "@nrwl/node:node",
-      "options": {
-        "buildTarget": "cdk:build"
-      },
-      "configurations": {
-        "production": {
-          "buildTarget": "cdk:build:production"
+    "bootstrap":{
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
         }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/cdk",
+        "command": "cdk bootstrap --profile strapped"
       }
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+    "destroy":{
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ],
+      "executor": "nx:run-commands",
       "options": {
-        "lintFilePatterns": ["packages/cdk/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/cdk"],
-      "options": {
-        "jestConfig": "packages/cdk/jest.config.ts",
-        "passWithNoTests": true
+        "cwd": "packages/cdk",
+        "command": "cdk destroy --profile strapped"
       }
     }
   },
+  "implicitDependencies": ["strapi"],
   "tags": []
 }
