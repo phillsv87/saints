@@ -4,52 +4,11 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
+      "outputs": ["dist/packages/strapi"],
       "options": {
-        "outputPath": "dist/packages/strapi",
-        "main": "packages/strapi/src/main.ts",
-        "tsConfig": "packages/strapi/tsconfig.app.json",
-        "assets": ["packages/strapi/src/assets"]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "packages/strapi/src/environments/environment.ts",
-              "with": "packages/strapi/src/environments/environment.prod.ts"
-            }
-          ]
-        }
-      }
-    },
-    "serve": {
-      "executor": "@nrwl/node:node",
-      "options": {
-        "buildTarget": "strapi:build"
-      },
-      "configurations": {
-        "production": {
-          "buildTarget": "strapi:build:production"
-        }
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/strapi/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/strapi"],
-      "options": {
-        "jestConfig": "packages/strapi/jest.config.ts",
-        "passWithNoTests": true
+        "cwd": "packages/strapi",
+        "command": "ls -lh"
       }
     }
   },
