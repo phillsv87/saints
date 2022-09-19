@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecra from 'aws-cdk-lib/aws-ecr-assets';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
@@ -9,15 +10,24 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as secrets from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 
+export interface StrappedStackProps extends cdk.StackProps
+{
+    domainName:string;
+}
+
 export class StrappedStack extends cdk.Stack {
 
     private readonly volumeName='data-volume';
 
     private readonly strapiPort=80;
 
-    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    private readonly domain;
+
+    constructor(scope: Construct, id: string, props: StrappedStackProps) {
 
         super(scope, id, props);
+
+        this.domain=props.domainName
 
         const vpc = new ec2.Vpc(this, 'vpc');
 
@@ -104,6 +114,11 @@ export class StrappedStack extends cdk.Stack {
             sourceVolume:volume.name
         });
 
+        const cert=new acm.Certificate(this,'StrapiCert',{
+            domainName:this.domain,
+            validation:acm.CertificateValidation.fromDns(),
+        })
+
 
         const loadBalancer=new ecsp.ApplicationLoadBalancedFargateService(this,'StrappedLoadBalancer',{
             vpc,
@@ -111,10 +126,21 @@ export class StrappedStack extends cdk.Stack {
                 cpuArchitecture:ecs.CpuArchitecture.ARM64,
                 operatingSystemFamily:ecs.OperatingSystemFamily.LINUX
             },
-
+            //domainName:this.domain,
+            certificate:cert,
+            //targetProtocol:elb2.ApplicationProtocol.HTTPS,
             taskDefinition:task,
             publicLoadBalancer: true,
+            //redirectHTTP:true,
         });
+
+        loadBalancer.targetGroup.configureHealthCheck({
+            //port:`443`,
+            path:'/',
+            interval:cdk.Duration.seconds(10),
+            healthyThresholdCount:2,
+            healthyHttpCodes:'200-399'
+        })
 
         mediaBucket.grantReadWrite(loadBalancer.taskDefinition.taskRole);
         mediaBucket.grantPutAcl(loadBalancer.taskDefinition.taskRole);

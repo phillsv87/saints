@@ -5,6 +5,7 @@ import { StrappedStack } from '../lib/strapped-stack';
 
 const app = new cdk.App();
 new StrappedStack(app, 'Strapped', {
+    domainName:'env0.iyio.io',
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
