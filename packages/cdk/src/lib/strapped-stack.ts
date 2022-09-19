@@ -19,9 +19,9 @@ export class StrappedStack extends cdk.Stack {
 
     private readonly volumeName='data-volume';
 
-    private readonly strapiPort=80;
+    private readonly strapiPort=8080;
 
-    private readonly domain;
+    private readonly domain:string;
 
     constructor(scope: Construct, id: string, props: StrappedStackProps) {
 
@@ -104,7 +104,7 @@ export class StrappedStack extends cdk.Stack {
                 streamPrefix: "StrApiFargateTask",
                 logRetention: 30
             }),
-            portMappings:[{hostPort:this.strapiPort,containerPort:80}],
+            portMappings:[{hostPort:this.strapiPort,containerPort:this.strapiPort}],
 
         });
 
@@ -117,7 +117,8 @@ export class StrappedStack extends cdk.Stack {
         const cert=new acm.Certificate(this,'StrapiCert',{
             domainName:this.domain,
             validation:acm.CertificateValidation.fromDns(),
-        })
+        });
+        new cdk.CfnOutput(this,'ApiUrl',{value:`https://${this.domain}`});
 
 
         const loadBalancer=new ecsp.ApplicationLoadBalancedFargateService(this,'StrappedLoadBalancer',{
@@ -126,16 +127,14 @@ export class StrappedStack extends cdk.Stack {
                 cpuArchitecture:ecs.CpuArchitecture.ARM64,
                 operatingSystemFamily:ecs.OperatingSystemFamily.LINUX
             },
-            //domainName:this.domain,
             certificate:cert,
-            //targetProtocol:elb2.ApplicationProtocol.HTTPS,
             taskDefinition:task,
             publicLoadBalancer: true,
             //redirectHTTP:true,
         });
 
         loadBalancer.targetGroup.configureHealthCheck({
-            //port:`443`,
+            port:String(this.strapiPort),
             path:'/',
             interval:cdk.Duration.seconds(10),
             healthyThresholdCount:2,
@@ -146,8 +145,6 @@ export class StrappedStack extends cdk.Stack {
         mediaBucket.grantPutAcl(loadBalancer.taskDefinition.taskRole);
 
         fs.connections.allowDefaultPortFrom(loadBalancer.service);
-
-
     }
 
     createEnv(mediaBucket:s3.Bucket, accessKey:iam.CfnAccessKey)
@@ -175,7 +172,7 @@ export class StrappedStack extends cdk.Stack {
             APP_KEYS: `${appKey1.secretValue.unsafeUnwrap()},${appKey2.secretValue.unsafeUnwrap()}`,
             DATABASE_FILENAME: '/mnt/db-fs/strapi.db',
             // HOST:'yrm4qg2yoypd6iu2xu5y3kn6s40hbkkm.lambda-url.us-east-1.on.aws',
-            PORT:`${this.strapiPort}`,
+            PORT:String(this.strapiPort),
             //NODE_ENV:'production',
             AWS_BUCKET: mediaBucket.bucketName,
             AWS_BUCKET_ACCESS_KEY_ID:accessKey.ref,
