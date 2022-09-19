@@ -1801,6 +1801,14 @@
     "request" "^2.83.0"
     "url-join" "4.0.1"
 
+"@strapi/provider-email-amazon-ses@^4.3.8":
+  "integrity" "sha512-hIxRsMBP8nPhN2fetCh5zp6nShj9fbD2TJmYSwe2ckbTnS9xLNVPraAw4toLZcaaOQocvZSKkZTcV8x65GIRNA=="
+  "resolved" "https://registry.npmjs.org/@strapi/provider-email-amazon-ses/-/provider-email-amazon-ses-4.3.8.tgz"
+  "version" "4.3.8"
+  dependencies:
+    "@strapi/utils" "4.3.8"
+    "node-ses" "^3.0.3"
+
 "@strapi/provider-email-sendgrid@^4.3.8":
   "integrity" "sha512-cD2fD4FBm9BDbBn5ecua32pbwUVaCFhcv45+FyKVKJ07Go3My2hQxzN1K7H5dXiTKzapvlsK6KWmP433Zf+/cA=="
   "resolved" "https://registry.npmjs.org/@strapi/provider-email-sendgrid/-/provider-email-sendgrid-4.3.8.tgz"
@@ -2674,6 +2682,11 @@
   "integrity" "sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA=="
   "resolved" "https://registry.npmjs.org/aws4/-/aws4-1.11.0.tgz"
   "version" "1.11.0"
+
+"aws4@1.9.1":
+  "integrity" "sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug=="
+  "resolved" "https://registry.npmjs.org/aws4/-/aws4-1.9.1.tgz"
+  "version" "1.9.1"
 
 "axios@^0.26.0":
   "integrity" "sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA=="
@@ -3878,6 +3891,13 @@
     "ms" "2.0.0"
 
 "debug@^2.3.3":
+  "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
+  "resolved" "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
+  "version" "2.6.9"
+  dependencies:
+    "ms" "2.0.0"
+
+"debug@^2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
   "version" "2.6.9"
@@ -7188,6 +7208,16 @@
     "long-timeout" "0.1.1"
     "sorted-array-functions" "^1.3.0"
 
+"node-ses@^3.0.3":
+  "integrity" "sha512-4NrcDlJp0fD5UJyi3tI8jJkJD+I2lBsQiSOJ7/gI0VFCWRJfv7WrUzydQ9sqDD7p2I9G0NGWBrRULkE+rNWQAg=="
+  "resolved" "https://registry.npmjs.org/node-ses/-/node-ses-3.0.3.tgz"
+  "version" "3.0.3"
+  dependencies:
+    "aws4" "1.9.1"
+    "debug" "^2.6.9"
+    "request" "2.88.2"
+    "xml2js" "^0.4.19"
+
 "nodemailer-fetch@1.6.0":
   "integrity" "sha512-P7S5CEVGAmDrrpn351aXOLYs1R/7fD5NamfMCHyi6WIkbjS2eeZUB/TkuvpOQr0bvRZicVqo59+8wbhR3yrJbQ=="
   "resolved" "https://registry.npmjs.org/nodemailer-fetch/-/nodemailer-fetch-1.6.0.tgz"
@@ -8473,7 +8503,7 @@
     "qs" "^6.9.6"
     "uuid" "^8.3.2"
 
-"request@^2.83.0":
+"request@^2.83.0", "request@2.88.2":
   "integrity" "sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw=="
   "resolved" "https://registry.npmjs.org/request/-/request-2.88.2.tgz"
   "version" "2.88.2"
@@ -10214,7 +10244,7 @@
   "resolved" "https://registry.npmjs.org/xdg-basedir/-/xdg-basedir-4.0.0.tgz"
   "version" "4.0.0"
 
-"xml2js@0.4.19":
+"xml2js@^0.4.19", "xml2js@0.4.19":
   "integrity" "sha512-esZnJZJOiJR9wWKMyuvSE1y6Dq5LCuJanqhxslH2bxM6duahNZ+HMpCLhBQGZkbX6xRf8x1Y2eJlgt2q3qo49Q=="
   "resolved" "https://registry.npmjs.org/xml2js/-/xml2js-0.4.19.tgz"
   "version" "0.4.19"

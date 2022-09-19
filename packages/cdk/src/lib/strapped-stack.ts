@@ -1,3 +1,4 @@
+import { VerifySesEmailAddress } from '@seeebiii/ses-verify-identities';
 import * as cdk from 'aws-cdk-lib';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
@@ -13,6 +14,7 @@ import { Construct } from 'constructs';
 export interface StrappedStackProps extends cdk.StackProps
 {
     domainName:string;
+    emailAddress:string;
 }
 
 export class StrappedStack extends cdk.Stack {
@@ -23,11 +25,20 @@ export class StrappedStack extends cdk.Stack {
 
     private readonly domain:string;
 
+    private readonly emailAddress:string;
+
+
     constructor(scope: Construct, id: string, props: StrappedStackProps) {
 
         super(scope, id, props);
 
-        this.domain=props.domainName
+        this.domain=props.domainName;
+        this.emailAddress=props.emailAddress;
+
+        new VerifySesEmailAddress(this, 'SesEmailVerification', {
+            emailAddress: this.emailAddress
+        });
+        new cdk.CfnOutput(this,'SenderEmailAddress',{value:this.emailAddress});
 
         const vpc = new ec2.Vpc(this, 'vpc');
 
@@ -36,6 +47,16 @@ export class StrappedStack extends cdk.Stack {
         });
 
         const bucketUser=new iam.User(this,'MediaUser');
+        bucketUser.addToPolicy(new iam.PolicyStatement({
+            effect:iam.Effect.ALLOW,
+            actions:['ses:*'],
+            resources:['*'],
+            conditions:{
+                "StringEquals":{
+                    "ses:FromAddress":this.emailAddress
+                }
+            }
+        }))
 
         const accessKey=new iam.CfnAccessKey(this,'MediaUserAccessKey',{
             userName:bucketUser.userName
@@ -87,17 +108,18 @@ export class StrappedStack extends cdk.Stack {
             memoryLimitMiB:2048,
             volumes:[volume],
             runtimePlatform:{
-                cpuArchitecture:ecs.CpuArchitecture.ARM64,
+                cpuArchitecture:ecs.CpuArchitecture.X86_64,
                 operatingSystemFamily:ecs.OperatingSystemFamily.LINUX
             }
         });
 
         mediaBucket.grantReadWrite(task.taskRole);
+        mediaBucket.grantPutAcl(task.taskRole);
 
 
         const container=task.addContainer('StrapiContainer',{
             image:ecs.ContainerImage.fromAsset('../strapi',{
-                platform:ecra.Platform.LINUX_ARM64
+                platform:ecra.Platform.LINUX_AMD64
             }),
             environment: env,
             logging:new ecs.AwsLogDriver({
@@ -124,7 +146,7 @@ export class StrappedStack extends cdk.Stack {
         const loadBalancer=new ecsp.ApplicationLoadBalancedFargateService(this,'StrappedLoadBalancer',{
             vpc,
             runtimePlatform:{
-                cpuArchitecture:ecs.CpuArchitecture.ARM64,
+                cpuArchitecture:ecs.CpuArchitecture.X86_64,
                 operatingSystemFamily:ecs.OperatingSystemFamily.LINUX
             },
             certificate:cert,
@@ -140,9 +162,6 @@ export class StrappedStack extends cdk.Stack {
             healthyThresholdCount:2,
             healthyHttpCodes:'200-399'
         })
-
-        mediaBucket.grantReadWrite(loadBalancer.taskDefinition.taskRole);
-        mediaBucket.grantPutAcl(loadBalancer.taskDefinition.taskRole);
 
         fs.connections.allowDefaultPortFrom(loadBalancer.service);
     }
@@ -170,12 +189,20 @@ export class StrappedStack extends cdk.Stack {
             JWT_SECRET: jwtSecret.secretValue.unsafeUnwrap(),
             API_TOKEN_SALT: apiTokeSalt.secretValue.unsafeUnwrap(),
             APP_KEYS: `${appKey1.secretValue.unsafeUnwrap()},${appKey2.secretValue.unsafeUnwrap()}`,
-            DATABASE_FILENAME: '/mnt/db-fs/strapi.db',
+            DATABASE_FILENAME: '/mnt/db-fs/strapi-data.db',
             PORT:String(this.strapiPort),
+
             AWS_BUCKET: mediaBucket.bucketName,
             AWS_BUCKET_ACCESS_KEY_ID:accessKey.ref,
             AWS_BUCKET_ACCESS_SECRET:accessKey.attrSecretAccessKey,
             AWS_BUCKET_REGION: this.region,
+
+            AWS_SES_EMAIL_FROM:this.emailAddress,
+            AWS_SES_EMAIL_REPLY_TO:this.emailAddress,
+            AWS_SES_REGION:this.region,
+            AWS_SES_ACCESS_KEY_ID:accessKey.ref,
+            AWS_SES_ACCESS_SECRET:accessKey.attrSecretAccessKey,
+
             __V:'1',
         }
     }
