@@ -130,7 +130,7 @@ export class StrappedStack extends cdk.Stack {
             certificate:cert,
             taskDefinition:task,
             publicLoadBalancer: true,
-            //redirectHTTP:true,
+            redirectHTTP:true,
         });
 
         loadBalancer.targetGroup.configureHealthCheck({
