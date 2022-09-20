@@ -5,7 +5,7 @@ WORKDIR /usr/app
 RUN echo "Installing common deps" \
     && apk add -q build-base
 
-COPY package.json package-lock.json .
+COPY package.json package-lock.json ./
 
 RUN npm install
 
