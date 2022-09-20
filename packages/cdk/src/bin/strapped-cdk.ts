@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
 import 'source-map-support/register';
-import { StrappedStack } from '../lib/strapped-stack';
+import { StrappedPipelineStack } from '../lib/StrappedPipelineStack';
 
 const app = new cdk.App();
-new StrappedStack(app, 'Strapped', {
+new StrappedPipelineStack(app, 'Strapped', {
+    gitHubOwner:'phillsv87',
+    gitHubRepo:'Strapped',
+    repoConnectionArn:'arn:aws:codestar-connections:us-east-1:809045117730:connection/af7dc45d-56b9-46ea-8c87-acbb044b0e9f',
     domainName:'env0.iyio.io',
     emailAddress:'yo@iyio.io',
   /* If you don't specify 'env', this stack will be environment-agnostic.

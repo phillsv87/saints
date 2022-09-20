@@ -16,6 +16,19 @@
         "command": "cdk deploy --profile strapped"
       }
     },
+    "synth":{
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/cdk",
+        "command": "cdk synth --profile strapped"
+      }
+    },
     "bootstrap":{
       "dependsOn": [
         {

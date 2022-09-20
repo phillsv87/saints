@@ -11,13 +11,13 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as secrets from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 
-export interface StrappedStackProps extends cdk.StackProps
+export interface StrappedBackendStageProps extends cdk.StageProps
 {
     domainName:string;
     emailAddress:string;
 }
 
-export class StrappedStack extends cdk.Stack {
+export class StrappedBackendStage extends cdk.Stage {
 
     private readonly volumeName='data-volume';
 
@@ -28,7 +28,7 @@ export class StrappedStack extends cdk.Stack {
     private readonly emailAddress:string;
 
 
-    constructor(scope: Construct, id: string, props: StrappedStackProps) {
+    constructor(scope: Construct, id: string, props: StrappedBackendStageProps) {
 
         super(scope, id, props);
 
@@ -195,11 +195,11 @@ export class StrappedStack extends cdk.Stack {
             AWS_BUCKET: mediaBucket.bucketName,
             AWS_BUCKET_ACCESS_KEY_ID:accessKey.ref,
             AWS_BUCKET_ACCESS_SECRET:accessKey.attrSecretAccessKey,
-            AWS_BUCKET_REGION: this.region,
+            AWS_BUCKET_REGION: this.region ?? 'us-east-1',
 
             AWS_SES_EMAIL_FROM:this.emailAddress,
             AWS_SES_EMAIL_REPLY_TO:this.emailAddress,
-            AWS_SES_REGION:this.region,
+            AWS_SES_REGION:this.region ?? 'us-east-1',
             AWS_SES_ACCESS_KEY_ID:accessKey.ref,
             AWS_SES_ACCESS_SECRET:accessKey.attrSecretAccessKey,
 
