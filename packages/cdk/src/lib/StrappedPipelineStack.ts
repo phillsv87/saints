@@ -1,7 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import * as pipelines from 'aws-cdk-lib/pipelines';
 import { Construct } from 'constructs';
-import { StrappedBackendStage } from './StrappedBackendStage';
+import { StrappedBackendStack, StrappedBackendStageProps } from './StrappedBackendStack';
 
 export interface StrappedPipelineStackProps extends cdk.StackProps
 {
@@ -52,4 +52,16 @@ export class StrappedPipelineStack extends cdk.Stack {
         // This is where we add the application stages
         // ...
     }
+}
+
+class StrappedBackendStage extends cdk.Stage
+{
+
+    constructor(scope:Construct, id:string, props:StrappedBackendStageProps & cdk.StackProps){
+
+        super(scope,id,props);
+
+        new StrappedBackendStack(this,'StrappedBackend',props);
+    }
+
 }

@@ -11,13 +11,13 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as secrets from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 
-export interface StrappedBackendStageProps extends cdk.StageProps
+export interface StrappedBackendStageProps
 {
     domainName:string;
     emailAddress:string;
 }
 
-export class StrappedBackendStage extends cdk.Stage {
+export class StrappedBackendStack extends cdk.Stack {
 
     private readonly volumeName='data-volume';
 
@@ -28,7 +28,7 @@ export class StrappedBackendStage extends cdk.Stage {
     private readonly emailAddress:string;
 
 
-    constructor(scope: Construct, id: string, props: StrappedBackendStageProps) {
+    constructor(scope: Construct, id: string, props: StrappedBackendStageProps & cdk.StackProps) {
 
         super(scope, id, props);
 
