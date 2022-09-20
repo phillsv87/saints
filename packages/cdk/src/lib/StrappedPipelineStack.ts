@@ -61,7 +61,7 @@ class StrappedBackendStage extends cdk.Stage
 
         super(scope,id,props);
 
-        new StrappedBackendStack(this,'StrappedBackend',props);
+        new StrappedBackendStack(this,'Strapped',props);
     }
 
 }
