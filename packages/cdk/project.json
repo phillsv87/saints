@@ -13,7 +13,20 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/cdk",
-        "command": "cdk deploy --profile strapped"
+        "command": "npx cdk deploy --profile strapped"
+      }
+    },
+    "synth-ci":{
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/cdk",
+        "command": "npx cdk synth"
       }
     },
     "synth":{
@@ -26,7 +39,7 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/cdk",
-        "command": "cdk synth --profile strapped"
+        "command": "npx cdk synth --profile strapped"
       }
     },
     "bootstrap":{
@@ -39,7 +52,7 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/cdk",
-        "command": "cdk bootstrap --profile strapped"
+        "command": "npx cdk bootstrap --profile strapped"
       }
     },
     "destroy":{
@@ -52,7 +65,7 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/cdk",
-        "command": "cdk destroy --profile strapped"
+        "command": "npx cdk destroy --profile strapped"
       }
     }
   },

@@ -40,7 +40,7 @@ export class StrappedPipelineStack extends cdk.Stack {
                 installCommands:['npm ci','npx pathic-util -i -b .'],
 
                 // Install dependencies, build and run cdk synth
-                commands: ['npx nx synth cdk'],
+                commands: ['npx nx synth-ci cdk'],
             }),
         });
 
