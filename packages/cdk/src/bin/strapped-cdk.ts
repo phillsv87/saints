@@ -6,7 +6,7 @@ import { StrappedPipelineStack } from '../lib/StrappedPipelineStack';
 const app = new cdk.App();
 new StrappedPipelineStack(app, 'StrappedPipeline', {
     gitHubOwner:'phillsv87',
-    gitHubRepo:'Strapped',
+    gitHubRepo:'strapped',
     repoConnectionArn:'arn:aws:codestar-connections:us-east-1:809045117730:connection/af7dc45d-56b9-46ea-8c87-acbb044b0e9f',
     domainName:'env0.iyio.io',
     emailAddress:'yo@iyio.io',
