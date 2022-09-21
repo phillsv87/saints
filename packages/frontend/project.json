@@ -3,7 +3,7 @@
     "sourceRoot": "packages/frontend",
     "projectType": "application",
     "targets": {
-        "build": {
+        "pre-build": {
             "executor": "@nrwl/next:build",
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "production",
@@ -36,10 +36,10 @@
                 }
             }
         },
-        "export": {
+        "build": {
             "executor": "@nrwl/next:export",
             "options": {
-                "buildTarget": "frontend:build:production"
+                "buildTarget": "frontend:pre-build:production"
             }
         },
         "test": {

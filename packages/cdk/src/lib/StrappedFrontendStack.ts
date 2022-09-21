@@ -41,7 +41,7 @@ export class StrappedFrontendStack extends cdk.Stack {
         new s3Deployment.BucketDeployment(this,`website-${name}-deployment`,{
             destinationBucket:bucket,
             sources:[
-                s3Deployment.Source.asset(`../../dist/packages/${name}`)
+                s3Deployment.Source.asset(`../../dist/packages/${name}/exported`)
             ]
         });
 
