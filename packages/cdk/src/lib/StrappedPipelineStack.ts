@@ -11,15 +11,15 @@ export class StrappedPipelineStack extends cdk.Stack {
         super(scope, id, props);
 
         const {
-            gitHubOwner,
-            gitHubRepo,
+            githubOwner,
+            githubRepo,
             branch='main',
             repoConnectionArn,
             apiDomain,
             emailAddress
         }=props;
 
-        const source=pipelines.CodePipelineSource.connection(`${gitHubOwner}/${gitHubRepo}`,branch,{
+        const source=pipelines.CodePipelineSource.connection(`${githubOwner}/${githubRepo}`,branch,{
             connectionArn:repoConnectionArn
         });
 
