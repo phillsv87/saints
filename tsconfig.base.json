@@ -15,7 +15,7 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@strapped/config": ["config/src/index.ts"],
+            "@strapped/config": ["packages/config/src/index.ts"],
             "@strapped/lib-app": ["packages/lib-app/src/index.ts"]
         }
     },
