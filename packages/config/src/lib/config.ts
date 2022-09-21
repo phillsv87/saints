@@ -9,9 +9,11 @@ export interface StackConfig
     emailAddress:string;
     awsProfile:string;
     awsRegion:string;
+    disableFrontend:boolean;
+    disableBackend:boolean;
 }
 
-const requireVar=<T extends keyof StackConfig>(key:T,value:string|undefined,defaultValue?:string):StackConfig[T]=>{
+const requireVar=<T extends keyof StackConfig>(key:T,value:string|undefined,defaultValue?:string):string=>{
     if(value){
         return value;
     }
@@ -36,6 +38,8 @@ export const stackConfig:Readonly<StackConfig>=Object.freeze({
     emailAddress:requireVar('emailAddress',process.env.NX_EMAIL_ADDRESS),
     awsProfile:requireVar('awsProfile',process.env.NX_AWS_PROFILE),
     awsRegion:requireVar('awsProfile',process.env.NX_AWS_REGION),
+    disableFrontend:requireVar('awsProfile',process.env.NX_DISABLE_FRONTEND,'false')==='true',
+    disableBackend:requireVar('awsProfile',process.env.NX_DISABLE_BACKEND,'false')==='true',
 });
 
 

@@ -1,9 +1,14 @@
+import { stackConfig } from "@strapped/config";
+
 export function Index() {
     /*
      * Replace the elements below with your own.
      *
      * Note: The corresponding styles are in the ./index.styled-jsx file.
      */
+
+    console.log('config',stackConfig);
+
     return (
         <div>
             <style jsx>{`

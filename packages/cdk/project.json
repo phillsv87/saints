@@ -69,6 +69,6 @@
             }
         }
     },
-    "implicitDependencies": ["strapi"],
+    "implicitDependencies": ["strapi","frontend"],
     "tags": []
 }

@@ -3,6 +3,7 @@ import * as cdk from 'aws-cdk-lib';
 import * as pipelines from 'aws-cdk-lib/pipelines';
 import { Construct } from 'constructs';
 import { StrappedBackendStack, StrappedBackendStageProps } from './StrappedBackendStack';
+import { StrappedFrontendStack, StrappedFrontendStackProps } from './StrappedFrontendStack';
 
 export type StrappedPipelineStackProps= StackConfig & cdk.StackProps;
 
@@ -13,10 +14,13 @@ export class StrappedPipelineStack extends cdk.Stack {
         const {
             githubOwner,
             githubRepo,
-            branch='main',
+            branch,
             repoConnectionArn,
             apiDomain,
-            emailAddress
+            emailAddress,
+            frontendDomain,
+            disableBackend,
+            disableFrontend
         }=props;
 
         const source=pipelines.CodePipelineSource.connection(`${githubOwner}/${githubRepo}`,branch,{
@@ -37,24 +41,43 @@ export class StrappedPipelineStack extends cdk.Stack {
             }),
         });
 
-        pipeline.addStage(new StrappedBackendStage(this,'StrappedBackend',{
-            emailAddress,
-            apiDomain
-        }));
+        if(!disableBackend){
+            pipeline.addStage(new StrappedBackendStage(this,'StrappedBackend',{
+                emailAddress,
+                apiDomain
+            }));
+        }
 
-        // This is where we add the application stages
-        // ...
+        if(!disableFrontend){
+            pipeline.addStage(new StrappedFrontendStage(this,'StrappedFrontendStage',{
+                frontendDomain
+            }));
+        }
+
     }
 }
 
 class StrappedBackendStage extends cdk.Stage
 {
 
-    constructor(scope:Construct, id:string, props:StrappedBackendStageProps & cdk.StackProps){
+    constructor(scope:Construct, id:string, props:StrappedBackendStageProps & cdk.StageProps){
 
         super(scope,id,props);
 
         new StrappedBackendStack(this,'Strapped',props);
+    }
+
+}
+
+
+class StrappedFrontendStage extends cdk.Stage
+{
+
+    constructor(scope:Construct, id:string, props:StrappedFrontendStackProps & cdk.StageProps){
+
+        super(scope,id,props);
+
+        new StrappedFrontendStack(this,'StrappedFrontend',props);
     }
 
 }
