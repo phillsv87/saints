@@ -1,15 +1,12 @@
 #!/usr/bin/env node
+import { stackConfig } from '@strapped/config';
 import * as cdk from 'aws-cdk-lib';
 import 'source-map-support/register';
 import { StrappedPipelineStack } from '../lib/StrappedPipelineStack';
 
 const app = new cdk.App();
 new StrappedPipelineStack(app, 'StrappedPipeline', {
-    gitHubOwner:'phillsv87',
-    gitHubRepo:'strapped',
-    repoConnectionArn:'arn:aws:codestar-connections:us-east-1:809045117730:connection/af7dc45d-56b9-46ea-8c87-acbb044b0e9f',
-    domainName:'env0.iyio.io',
-    emailAddress:'yo@iyio.io',
+    ...stackConfig
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

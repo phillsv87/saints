@@ -1,74 +1,74 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/cdk/src",
-  "projectType": "application",
-  "targets": {
-    "deploy":{
-      "dependsOn": [
-        {
-          "target": "build",
-          "projects": "dependencies"
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/cdk/src",
+    "projectType": "application",
+    "targets": {
+        "deploy": {
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "projects": "dependencies"
+                }
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "packages/cdk",
+                "command": "npx cdk deploy --profile strapped"
+            }
+        },
+        "synth-ci": {
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "projects": "dependencies"
+                }
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "packages/cdk",
+                "command": "npx cdk synth"
+            }
+        },
+        "synth": {
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "projects": "dependencies"
+                }
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "packages/cdk",
+                "command": "npx cdk synth --profile strapped"
+            }
+        },
+        "bootstrap": {
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "projects": "dependencies"
+                }
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "packages/cdk",
+                "command": "npx cdk bootstrap --profile strapped"
+            }
+        },
+        "destroy": {
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "projects": "dependencies"
+                }
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "packages/cdk",
+                "command": "npx cdk destroy --profile strapped"
+            }
         }
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "packages/cdk",
-        "command": "npx cdk deploy --profile strapped"
-      }
     },
-    "synth-ci":{
-      "dependsOn": [
-        {
-          "target": "build",
-          "projects": "dependencies"
-        }
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "packages/cdk",
-        "command": "npx cdk synth"
-      }
-    },
-    "synth":{
-      "dependsOn": [
-        {
-          "target": "build",
-          "projects": "dependencies"
-        }
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "packages/cdk",
-        "command": "npx cdk synth --profile strapped"
-      }
-    },
-    "bootstrap":{
-      "dependsOn": [
-        {
-          "target": "build",
-          "projects": "dependencies"
-        }
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "packages/cdk",
-        "command": "npx cdk bootstrap --profile strapped"
-      }
-    },
-    "destroy":{
-      "dependsOn": [
-        {
-          "target": "build",
-          "projects": "dependencies"
-        }
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "packages/cdk",
-        "command": "npx cdk destroy --profile strapped"
-      }
-    }
-  },
-  "implicitDependencies": ["strapi"],
-  "tags": []
+    "implicitDependencies": ["strapi"],
+    "tags": []
 }

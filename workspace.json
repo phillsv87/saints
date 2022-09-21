@@ -1,8 +1,12 @@
 {
-  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
-  "version": 2,
-  "projects": {
-    "cdk": "packages/cdk",
-    "strapi": "packages/strapi"
-  }
+    "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+    "version": 2,
+    "projects": {
+        "cdk": "packages/cdk",
+        "config": "config",
+        "frontend": "packages/frontend",
+        "frontend-e2e": "packages/frontend-e2e",
+        "lib-app": "packages/lib-app",
+        "strapi": "packages/strapi"
+    }
 }

@@ -1,17 +1,10 @@
+import { StackConfig } from '@strapped/config';
 import * as cdk from 'aws-cdk-lib';
 import * as pipelines from 'aws-cdk-lib/pipelines';
 import { Construct } from 'constructs';
 import { StrappedBackendStack, StrappedBackendStageProps } from './StrappedBackendStack';
 
-export interface StrappedPipelineStackProps extends cdk.StackProps
-{
-    gitHubOwner:string;
-    gitHubRepo:string;
-    branch?:string;
-    repoConnectionArn:string;
-    domainName:string;
-    emailAddress:string;
-}
+export type StrappedPipelineStackProps= StackConfig & cdk.StackProps;
 
 export class StrappedPipelineStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props: StrappedPipelineStackProps) {
@@ -22,7 +15,7 @@ export class StrappedPipelineStack extends cdk.Stack {
             gitHubRepo,
             branch='main',
             repoConnectionArn,
-            domainName,
+            apiDomain,
             emailAddress
         }=props;
 
@@ -46,7 +39,7 @@ export class StrappedPipelineStack extends cdk.Stack {
 
         pipeline.addStage(new StrappedBackendStage(this,'StrappedBackend',{
             emailAddress,
-            domainName
+            apiDomain
         }));
 
         // This is where we add the application stages

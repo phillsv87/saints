@@ -1,0 +1,23 @@
+{
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/lib-app/src",
+    "projectType": "library",
+    "tags": ["frontend"],
+    "targets": {
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/lib-app/**/*.{ts,tsx,js,jsx}"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/packages/lib-app"],
+            "options": {
+                "jestConfig": "packages/lib-app/jest.config.ts",
+                "passWithNoTests": true
+            }
+        }
+    }
+}

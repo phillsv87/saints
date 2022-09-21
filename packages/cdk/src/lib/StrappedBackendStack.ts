@@ -13,7 +13,7 @@ import { Construct } from 'constructs';
 
 export interface StrappedBackendStageProps
 {
-    domainName:string;
+    apiDomain:string;
     emailAddress:string;
 }
 
@@ -23,7 +23,7 @@ export class StrappedBackendStack extends cdk.Stack {
 
     private readonly strapiPort=8080;
 
-    private readonly domain:string;
+    private readonly apiDomain:string;
 
     private readonly emailAddress:string;
 
@@ -32,7 +32,7 @@ export class StrappedBackendStack extends cdk.Stack {
 
         super(scope, id, props);
 
-        this.domain=props.domainName;
+        this.apiDomain=props.apiDomain;
         this.emailAddress=props.emailAddress;
 
         new VerifySesEmailAddress(this, 'SesEmailVerification', {
@@ -137,10 +137,10 @@ export class StrappedBackendStack extends cdk.Stack {
         });
 
         const cert=new acm.Certificate(this,'StrapiCert',{
-            domainName:this.domain,
+            domainName:this.apiDomain,
             validation:acm.CertificateValidation.fromDns(),
         });
-        new cdk.CfnOutput(this,'ApiUrl',{value:`https://${this.domain}`});
+        new cdk.CfnOutput(this,'ApiUrl',{value:`https://${this.apiDomain}`});
 
 
         const loadBalancer=new ecsp.ApplicationLoadBalancedFargateService(this,'StrappedLoadBalancer',{
