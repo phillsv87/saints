@@ -11,6 +11,7 @@ export interface StackConfig
     awsRegion:string;
     enableFrontend:boolean;
     enableBackend:boolean;
+    stack:string;
 
 }
 
@@ -41,6 +42,7 @@ export const stackConfig:Readonly<StackConfig>=Object.freeze({
     awsRegion:requireVar('awsRegion',process.env.NX_AWS_REGION),
     enableFrontend:requireVar('enableFrontend',process.env.NX_ENABLE_FRONTEND,'false')==='true',
     enableBackend:requireVar('enableBackend',process.env.NX_ENABLE_BACKEND,'false')==='true',
+    stack:requireVar('stack',process.env.NX_STACK,'StrappedPipeline'),
 });
 
 

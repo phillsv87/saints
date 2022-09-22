@@ -2,22 +2,26 @@
 import { stackConfig } from '@strapped/config';
 import * as cdk from 'aws-cdk-lib';
 import 'source-map-support/register';
+import { StrappedBackendStack } from '../lib/StrappedBackendStack';
+import { StrappedFrontendStack } from '../lib/StrappedFrontendStack';
 import { StrappedPipelineStack } from '../lib/StrappedPipelineStack';
 
 const app = new cdk.App();
-new StrappedPipelineStack(app, `StrappedPipeline-${stackConfig.branch}`, {
-    ...stackConfig
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
 
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
-  // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+switch(stackConfig.stack){
 
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
+    case 'StrappedPipeline':
+        new StrappedPipelineStack(app, `StrappedPipeline-${stackConfig.branch}`, stackConfig);
+        break;
 
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
-});
+    case 'StrappedBackend':
+        new StrappedBackendStack(app,`StrappedBackend-${stackConfig.branch}`,stackConfig);
+        break;
+
+    case 'StrappedFrontend':
+        new StrappedFrontendStack(app,`StrappedFrontend-${stackConfig.branch}`,stackConfig);
+        break;
+
+    default:
+        throw new Error(`No stack matching ${stackConfig.stack}`);
+}
