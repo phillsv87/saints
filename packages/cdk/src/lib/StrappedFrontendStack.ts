@@ -35,7 +35,9 @@ export class StrappedFrontendStack extends cdk.Stack {
         }
 
         const bucket=new s3.Bucket(this,'website-'+name,{
-            accessControl:s3.BucketAccessControl.PRIVATE
+            accessControl:s3.BucketAccessControl.PRIVATE,
+            autoDeleteObjects:true,
+            removalPolicy:cdk.RemovalPolicy.DESTROY
         });
 
         new s3Deployment.BucketDeployment(this,`website-${name}-deployment`,{
