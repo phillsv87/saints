@@ -10,7 +10,7 @@ CLEAR=$4
 
 if [ "$CLEAR" == "1" ]; then
     npx nx reset
-}
+fi
 
 if [ "$MATCH_BRANCH" == "1" ]; then
     export NX_BRANCH=''
