@@ -27,7 +27,7 @@ export class StrappedPipelineStack extends cdk.Stack {
             connectionArn:repoConnectionArn
         });
 
-        const pipeline = new pipelines.CodePipeline(this, `StrappedPipeline_${branch}`, {
+        const pipeline = new pipelines.CodePipeline(this, `StrappedPipeline-${branch}`, {
 
             // How it will be built and synthesized
             synth: new pipelines.ShellStep('Synth', {
@@ -42,7 +42,7 @@ export class StrappedPipelineStack extends cdk.Stack {
         });
 
         if(enableBackend){
-            pipeline.addStage(new StrappedBackendStage(this,`StrappedBackendStage_${branch}`,{
+            pipeline.addStage(new StrappedBackendStage(this,`StrappedBackendStage-${branch}`,{
                 branch,
                 emailAddress,
                 apiDomain
@@ -50,7 +50,7 @@ export class StrappedPipelineStack extends cdk.Stack {
         }
 
         if(!enableFrontend){
-            pipeline.addStage(new StrappedFrontendStage(this,`StrappedFrontendStage_${branch}`,{
+            pipeline.addStage(new StrappedFrontendStage(this,`StrappedFrontendStage-${branch}`,{
                 branch,
                 frontendDomain
             }));
@@ -74,7 +74,7 @@ class StrappedBackendStage extends cdk.Stage
 
         super(scope,id,props);
 
-        new StrappedBackendStack(this,`StrappedBackend_${branch}`,props);
+        new StrappedBackendStack(this,`StrappedBackend-${branch}`,props);
     }
 
 }
@@ -89,7 +89,7 @@ class StrappedFrontendStage extends cdk.Stage
 
         super(scope,id,props);
 
-        new StrappedFrontendStack(this,`StrappedFrontend_${branch}`,props);
+        new StrappedFrontendStack(this,`StrappedFrontend-${branch}`,props);
     }
 
 }
