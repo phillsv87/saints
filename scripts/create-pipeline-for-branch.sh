@@ -16,4 +16,6 @@ sleep 5
 
 npm run install-all
 
+npx nx reset
+
 scripts/nx-run-with-env.sh "branch-$BRANCH" 'cdk:deploy' '1'

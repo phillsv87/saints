@@ -23,6 +23,7 @@ export function Index() {
                             <span> Hello there, </span>
                             Welcome to Strapped 👋
                         </h1>
+                        <h2>Deployed on branch {stackConfig.branch}</h2>
                     </div>
 
                     <div id="hero" className="rounded">
