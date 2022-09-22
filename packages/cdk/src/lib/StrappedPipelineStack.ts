@@ -49,7 +49,7 @@ export class StrappedPipelineStack extends cdk.Stack {
             }));
         }
 
-        if(!enableFrontend){
+        if(enableFrontend){
             pipeline.addStage(new StrappedFrontendStage(this,`StrappedFrontendStage-${branch}`,{
                 branch,
                 frontendDomain
