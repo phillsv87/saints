@@ -5,7 +5,7 @@ import 'source-map-support/register';
 import { StrappedPipelineStack } from '../lib/StrappedPipelineStack';
 
 const app = new cdk.App();
-new StrappedPipelineStack(app, 'StrappedPipeline', {
+new StrappedPipelineStack(app, `StrappedPipeline_${stackConfig.branch}`, {
     ...stackConfig
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,

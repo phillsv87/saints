@@ -9,8 +9,9 @@ export interface StackConfig
     emailAddress:string;
     awsProfile:string;
     awsRegion:string;
-    disableFrontend:boolean;
-    disableBackend:boolean;
+    enableFrontend:boolean;
+    enableBackend:boolean;
+
 }
 
 const requireVar=<T extends keyof StackConfig>(key:T,value:string|undefined,defaultValue?:string):string=>{
@@ -34,12 +35,12 @@ export const stackConfig:Readonly<StackConfig>=Object.freeze({
     branch:requireVar('branch',process.env.NX_BRANCH,'main'),
     repoConnectionArn:requireVar('repoConnectionArn',process.env.NX_REPO_CONNECTION_ARN),
     apiDomain:requireVar('apiDomain',process.env.NX_API_DOMAIN),
-    frontendDomain:requireVar('apiDomain',process.env.NX_FRONTEND_DOMAIN),
+    frontendDomain:requireVar('frontendDomain',process.env.NX_FRONTEND_DOMAIN),
     emailAddress:requireVar('emailAddress',process.env.NX_EMAIL_ADDRESS),
     awsProfile:requireVar('awsProfile',process.env.NX_AWS_PROFILE),
-    awsRegion:requireVar('awsProfile',process.env.NX_AWS_REGION),
-    disableFrontend:requireVar('awsProfile',process.env.NX_DISABLE_FRONTEND,'false')==='true',
-    disableBackend:requireVar('awsProfile',process.env.NX_DISABLE_BACKEND,'false')==='true',
+    awsRegion:requireVar('awsRegion',process.env.NX_AWS_REGION),
+    enableFrontend:requireVar('enableFrontend',process.env.NX_ENABLE_FRONTEND,'false')==='true',
+    enableBackend:requireVar('enableBackend',process.env.NX_ENABLE_BACKEND,'false')==='true',
 });
 
 

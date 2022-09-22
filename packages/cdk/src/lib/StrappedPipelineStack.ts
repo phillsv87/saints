@@ -19,15 +19,15 @@ export class StrappedPipelineStack extends cdk.Stack {
             apiDomain,
             emailAddress,
             frontendDomain,
-            disableBackend,
-            disableFrontend
+            enableBackend,
+            enableFrontend,
         }=props;
 
         const source=pipelines.CodePipelineSource.connection(`${githubOwner}/${githubRepo}`,branch,{
             connectionArn:repoConnectionArn
         });
 
-        const pipeline = new pipelines.CodePipeline(this, 'CdkPipeline', {
+        const pipeline = new pipelines.CodePipeline(this, `StrappedPipeline_${branch}`, {
 
             // How it will be built and synthesized
             synth: new pipelines.ShellStep('Synth', {
@@ -37,19 +37,21 @@ export class StrappedPipelineStack extends cdk.Stack {
                 installCommands:['npm ci','npx pathic-util -i -b .'],
 
                 // Install dependencies, build and run cdk synth
-                commands: ['npx nx synth-ci cdk'],
+                commands: [`scripts/nx-run-with-env.sh branch-${branch} cdk:synth`],
             }),
         });
 
-        if(!disableBackend){
-            pipeline.addStage(new StrappedBackendStage(this,'StrappedBackend',{
+        if(enableBackend){
+            pipeline.addStage(new StrappedBackendStage(this,`StrappedBackendStage_${branch}`,{
+                branch,
                 emailAddress,
                 apiDomain
             }));
         }
 
-        if(!disableFrontend){
-            pipeline.addStage(new StrappedFrontendStage(this,'StrappedFrontendStage',{
+        if(!enableFrontend){
+            pipeline.addStage(new StrappedFrontendStage(this,`StrappedFrontendStage_${branch}`,{
+                branch,
                 frontendDomain
             }));
         }
@@ -57,27 +59,37 @@ export class StrappedPipelineStack extends cdk.Stack {
     }
 }
 
+interface EnvStageProps
+{
+    branch:string;
+}
+
 class StrappedBackendStage extends cdk.Stage
 {
 
-    constructor(scope:Construct, id:string, props:StrappedBackendStageProps & cdk.StageProps){
+    constructor(scope:Construct, id:string, {
+        branch,
+        ...props
+    }:EnvStageProps & StrappedBackendStageProps & cdk.StageProps){
 
         super(scope,id,props);
 
-        new StrappedBackendStack(this,'Strapped',props);
+        new StrappedBackendStack(this,`StrappedBackend_${branch}`,props);
     }
 
 }
 
-
 class StrappedFrontendStage extends cdk.Stage
 {
 
-    constructor(scope:Construct, id:string, props:StrappedFrontendStackProps & cdk.StageProps){
+    constructor(scope:Construct, id:string, {
+        branch,
+        ...props
+    }:EnvStageProps & StrappedFrontendStackProps & cdk.StageProps){
 
         super(scope,id,props);
 
-        new StrappedFrontendStack(this,'StrappedFrontend',props);
+        new StrappedFrontendStack(this,`StrappedFrontend_${branch}`,props);
     }
 
 }

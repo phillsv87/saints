@@ -16,19 +16,6 @@
                 "command": "npx cdk deploy"
             }
         },
-        "synth-ci": {
-            "dependsOn": [
-                {
-                    "target": "build",
-                    "projects": "dependencies"
-                }
-            ],
-            "executor": "nx:run-commands",
-            "options": {
-                "cwd": "packages/cdk",
-                "command": "npx cdk synth"
-            }
-        },
         "synth": {
             "dependsOn": [
                 {

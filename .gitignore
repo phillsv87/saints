@@ -41,3 +41,6 @@ cdk.out
 
 # Next.js
 .next
+
+# Other
+.env.local

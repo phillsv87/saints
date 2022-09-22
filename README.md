@@ -1,95 +1,86 @@
 # Strapped
-Deploy Strapi on a strapped budget using only AWS lambda and SQLite. It's cheap.
+Deploy Strapi on a strapped budget.
+
+## What is Strapped
+Strapped is a CDK application that deploys a Strapi backend, NextJS frontend and CD/CI pipeline
+to AWS.
+
+## Install
+Run **( npm run install-all )** to install all dependencies in all projects,
+including the root projects
+
+## AWS Credentials
+Follow the the standard AWS CLI credentials instructions to setup your AWS credentials.
+
+https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 
 
+## A quick note
+Example code and links use the default region of **us-east-1**. Be sure to replace with your region.
 
-This project was generated using [Nx](https://nx.dev).
+## Configuration
+All configuration values are stored in the .env file at the root of the repo.
+Make sure to update and review before first deployment.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+``` properties
+# .env
 
-🔎 **Smart, Fast and Extensible Build System**
+# GitHub Username
+NX_GITHUB_OWNER=...
 
-## Adding capabilities to your workspace
+# Repo name
+NX_GITHUB_REPO=...
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+# ARN of a GitHub connector - https://us-east-1.console.aws.amazon.com/codesuite/settings/connections
+NX_REPO_CONNECTION_ARN=ARN of connection to git
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+# Branch to follow and deploy updates for
+NX_BRANCH=main
 
-Below are our core plugins:
+# Custom API Domain
+NX_API_DOMAIN=...
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+# Custom Frontend Domain
+NX_FRONTEND_DOMAIN=...
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+# Email address used to send transactional emails from
+NX_EMAIL_ADDRESS=...
 
-## Generate an application
+# AWS profile - Set both NX_AWS_PROFILE and AWS_PROFILE
+NX_AWS_PROFILE=default
+AWS_PROFILE=default
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+# AWS region - Set both NX_AWS_REGION and AWS_REGION
+NX_AWS_REGION=us-east-1
+AWS_REGION=us-east-1
 
-> You can use any of the plugins above to generate applications as well.
+# When true deployment of the backend is enabled
+NX_ENABLE_BACKEND=true
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+# When true deployment of the frontend is enabled
+NX_ENABLE_FRONTEND=true
+```
 
-## Generate a library
+## Local Developer Configuration
+Local developer specific configuration can be defined in the .env.local file.
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+``` properties
+# .env.local
 
-> You can also use any of the plugins above to generate libraries as well.
+# Local AWS profile - Set both NX_AWS_PROFILE and AWS_PROFILE
+NX_AWS_PROFILE=bob
+AWS_PROFILE=bob
 
-Libraries are shareable across libraries and applications. They can be imported from `@strapped/mylib`.
+```
 
-## Development server
-
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+## DNS verification and configuration
+During the first deployment of the pipeline you will need to complete DNS verification and configuration. DNS  verification consists of adding a CNAME record to your frontend and backend
+domains. You can view the CNAME values in the certificate manager - https://us-east-1.console.aws.amazon.com/acm/home?region=us-east-1#/certificates/list.
 
 
+Once the pipeline has deployed you will then add CNAME records to point your frontend and backend
+domains to their corresponding aws domains.
 
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+## Pipeline Initialization
+To initialization the pipeline for the current branch run **( scripts/create-pipeline-for-branch.sh )**.
+Once initialized pushes to the branch will be automatically deployed.

@@ -2,10 +2,13 @@
     "name": "strapped",
     "version": "0.0.0",
     "license": "MIT",
-    "scripts": {},
+    "scripts": {
+        "install-all": "npm install && npx pathic-util -ik -b .",
+        "clean": "rm -rf cdk.out dist && npx pathic-util -u -b ."
+    },
     "private": true,
     "devDependencies": {
-        "@iyio/pathic": "^0.0.18",
+        "@iyio/pathic": "^0.0.19",
         "@nrwl/cli": "14.7.3",
         "@nrwl/cypress": "14.7.8",
         "@nrwl/eslint-plugin-nx": "14.7.3",
