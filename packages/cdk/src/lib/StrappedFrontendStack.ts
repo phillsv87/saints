@@ -40,9 +40,14 @@ export class StrappedFrontendStack extends cdk.Stack {
             removalPolicy:cdk.RemovalPolicy.DESTROY
         });
 
+        const distribution = new cf.Distribution(this, 'Distribution', {
+            defaultBehavior: { origin: new cfo.S3Origin(bucket) },
+        });
+
         new s3Deployment.BucketDeployment(this,`website-${name}-deployment`,{
             destinationBucket:bucket,
             distributionPaths:['/*'],
+            distribution,
             sources:[
                 s3Deployment.Source.asset(`../../dist/packages/${name}/exported`)
             ]
