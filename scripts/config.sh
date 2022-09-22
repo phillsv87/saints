@@ -1,11 +1,16 @@
 #!/bin/bash
-set -e
+
+ENV=$1
 
 set -o allexport
-source "$(dirname "$0")/../.env"
+source "$(dirname $BASH_SOURCE)/../.env"
 
-if [ -f "$(dirname "$0")/../.env.local" ]; then
-    source "$(dirname "$0")/../.env.local"
+if [ -f "$(dirname $BASH_SOURCE)/../.env.local" ]; then
+    source "$(dirname $BASH_SOURCE)/../.env.local"
+fi
+
+if [ "$ENV" != "" ]; then
+    source "$(dirname $BASH_SOURCE)/../.env.$ENV"
 fi
 
 set +o allexport
