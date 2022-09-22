@@ -8,7 +8,7 @@ import { StrappedPipelineStack } from '../lib/StrappedPipelineStack';
 
 const app = new cdk.App();
 
-switch(stackConfig.stack){
+switch(stackConfig.cdkStack){
 
     case 'StrappedPipeline':
         new StrappedPipelineStack(app, `StrappedPipeline-${stackConfig.branch}`, stackConfig);
@@ -23,5 +23,5 @@ switch(stackConfig.stack){
         break;
 
     default:
-        throw new Error(`No stack matching ${stackConfig.stack}`);
+        throw new Error(`No stack matching ${stackConfig.cdkStack}`);
 }
