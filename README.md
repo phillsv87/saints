@@ -26,25 +26,25 @@ Make sure to update and review before first deployment.
 # .env
 
 # GitHub Username
-NX_GITHUB_OWNER=...
+NX_GITHUB_OWNER=exampleGitHubUserName
 
 # Repo name
-NX_GIT_REPO=...
+NX_GIT_REPO=exampleRepoName
 
 # ARN of a GitHub connector - https://us-east-1.console.aws.amazon.com/codesuite/settings/connections
-NX_REPO_CONNECTION_ARN=ARN of connection to git
+NX_REPO_CONNECTION_ARN=arn:aws:codestar-connections:REGION:ACCOUNT:connection/ID
 
 # Branch to follow and deploy updates for
 NX_BRANCH=main
 
-# Custom API Domain
-NX_API_DOMAIN=...
+# API Domain
+NX_API_DOMAIN=api.example.com
 
-# Custom Frontend Domain
-NX_FRONTEND_DOMAIN=...
+# Frontend Domain
+NX_FRONTEND_DOMAIN=app.example.com
 
 # Email address used to send transactional emails from
-NX_EMAIL_ADDRESS=...
+NX_EMAIL_ADDRESS=hello@example.com
 
 # AWS profile - Set both NX_AWS_PROFILE and AWS_PROFILE
 NX_AWS_PROFILE=default
