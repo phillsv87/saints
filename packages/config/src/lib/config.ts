@@ -1,7 +1,7 @@
 export interface StackConfig
 {
     githubOwner:string;
-    githubRepo:string;
+    gitRepo:string;
     branch:string;
     repoConnectionArn:string;
     apiDomain:string;
@@ -32,7 +32,7 @@ const requireVar=<T extends keyof StackConfig>(key:T,value:string|undefined,defa
 
 export const stackConfig:Readonly<StackConfig>=Object.freeze({
     githubOwner:requireVar('githubOwner',process.env.NX_GITHUB_OWNER),
-    githubRepo:requireVar('githubRepo',process.env.NX_GITHUB_REPO),
+    gitRepo:requireVar('gitRepo',process.env.NX_GIT_REPO),
     branch:requireVar('branch',process.env.NX_BRANCH,'main'),
     repoConnectionArn:requireVar('repoConnectionArn',process.env.NX_REPO_CONNECTION_ARN),
     apiDomain:requireVar('apiDomain',process.env.NX_API_DOMAIN),

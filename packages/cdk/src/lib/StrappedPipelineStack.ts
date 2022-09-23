@@ -13,7 +13,7 @@ export class StrappedPipelineStack extends cdk.Stack {
 
         const {
             githubOwner,
-            githubRepo,
+            gitRepo,
             branch,
             repoConnectionArn,
             apiDomain,
@@ -23,7 +23,7 @@ export class StrappedPipelineStack extends cdk.Stack {
             enableFrontend,
         }=props;
 
-        const source=pipelines.CodePipelineSource.connection(`${githubOwner}/${githubRepo}`,branch,{
+        const source=pipelines.CodePipelineSource.connection(`${githubOwner}/${gitRepo}`,branch,{
             connectionArn:repoConnectionArn
         });
 
