@@ -19,6 +19,8 @@ export class StrappedPipelineStack extends cdk.Stack {
         frontendDomain,
         enableBackend,
         enableFrontend,
+        instanceVCpu,
+        instanceMemoryMb,
         ...props
     }: StrappedPipelineStackProps) {
         super(scope, id, props);
@@ -46,7 +48,9 @@ export class StrappedPipelineStack extends cdk.Stack {
                 stackName,
                 branch,
                 emailAddress,
-                apiDomain
+                apiDomain,
+                instanceVCpu,
+                instanceMemoryMb,
             }));
         }
 

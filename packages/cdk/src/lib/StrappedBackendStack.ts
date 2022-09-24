@@ -15,6 +15,8 @@ export interface StrappedBackendStageProps
 {
     apiDomain:string;
     emailAddress:string;
+    instanceVCpu:number;
+    instanceMemoryMb:number;
 }
 
 export class StrappedBackendStack extends cdk.Stack {
@@ -23,22 +25,19 @@ export class StrappedBackendStack extends cdk.Stack {
 
     private readonly strapiPort=8080;
 
-    private readonly apiDomain:string;
-
-    private readonly emailAddress:string;
+    private readonly props:StrappedBackendStageProps;
 
 
     constructor(scope: Construct, id: string, props: StrappedBackendStageProps & cdk.StackProps) {
 
         super(scope, id, props);
 
-        this.apiDomain=props.apiDomain;
-        this.emailAddress=props.emailAddress;
+        this.props=props;
 
         new VerifySesEmailAddress(this, 'SesEmailVerification', {
-            emailAddress: this.emailAddress
+            emailAddress: this.props.emailAddress
         });
-        new cdk.CfnOutput(this,'SenderEmailAddress',{value:this.emailAddress});
+        new cdk.CfnOutput(this,'SenderEmailAddress',{value:this.props.emailAddress});
 
         const vpc = new ec2.Vpc(this, 'vpc');
 
@@ -53,7 +52,7 @@ export class StrappedBackendStack extends cdk.Stack {
             resources:['*'],
             conditions:{
                 "StringEquals":{
-                    "ses:FromAddress":this.emailAddress
+                    "ses:FromAddress":this.props.emailAddress
                 }
             }
         }))
@@ -104,8 +103,8 @@ export class StrappedBackendStack extends cdk.Stack {
         }
 
         const task=new ecs.FargateTaskDefinition(this,'StrapiTask',{
-            cpu:1024,
-            memoryLimitMiB:2048,
+            cpu:this.props.instanceVCpu,
+            memoryLimitMiB:this.props.instanceMemoryMb,
             volumes:[volume],
             runtimePlatform:{
                 cpuArchitecture:ecs.CpuArchitecture.X86_64,
@@ -137,10 +136,10 @@ export class StrappedBackendStack extends cdk.Stack {
         });
 
         const cert=new acm.Certificate(this,'StrapiCert',{
-            domainName:this.apiDomain,
+            domainName:this.props.apiDomain,
             validation:acm.CertificateValidation.fromDns(),
         });
-        new cdk.CfnOutput(this,'ApiUrl',{value:`https://${this.apiDomain}`});
+        new cdk.CfnOutput(this,'ApiUrl',{value:`https://${this.props.apiDomain}`});
 
 
         const loadBalancer=new ecsp.ApplicationLoadBalancedFargateService(this,'StrappedLoadBalancer',{
@@ -197,8 +196,8 @@ export class StrappedBackendStack extends cdk.Stack {
             AWS_BUCKET_ACCESS_SECRET:accessKey.attrSecretAccessKey,
             AWS_BUCKET_REGION: this.region ?? 'us-east-1',
 
-            AWS_SES_EMAIL_FROM:this.emailAddress,
-            AWS_SES_EMAIL_REPLY_TO:this.emailAddress,
+            AWS_SES_EMAIL_FROM:this.props.emailAddress,
+            AWS_SES_EMAIL_REPLY_TO:this.props.emailAddress,
             AWS_SES_REGION:this.region ?? 'us-east-1',
             AWS_SES_ACCESS_KEY_ID:accessKey.ref,
             AWS_SES_ACCESS_SECRET:accessKey.attrSecretAccessKey,
