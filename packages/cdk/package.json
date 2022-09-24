@@ -1,9 +1,6 @@
 {
-  "name": "cdk-init",
+  "name": "strapped-cdk",
   "version": "0.1.0",
-  "bin": {
-    "cdk-init": "bin/cdk-init.js"
-  },
   "scripts": {},
   "devDependencies": {
     "@seeebiii/ses-verify-identities": "^4.1.0",

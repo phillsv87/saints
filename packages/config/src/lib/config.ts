@@ -1,5 +1,6 @@
 export interface StackConfig
 {
+    stackName:string;
     githubOwner:string;
     gitRepo:string;
     branch:string;
@@ -31,6 +32,7 @@ const requireVar=<T extends keyof StackConfig>(key:T,value:string|undefined,defa
 
 
 export const stackConfig:Readonly<StackConfig>=Object.freeze({
+    stackName:requireVar('stackName',process.env.NX_STACK_NAME),
     githubOwner:requireVar('githubOwner',process.env.NX_GITHUB_OWNER),
     gitRepo:requireVar('gitRepo',process.env.NX_GIT_REPO),
     branch:requireVar('branch',process.env.NX_BRANCH,'main'),

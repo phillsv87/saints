@@ -25,6 +25,9 @@ Make sure to update and review before first deployment.
 ``` properties
 # .env
 
+# Name of you stack
+NX_STACK_NAME=ExampleName
+
 # GitHub Username
 NX_GITHUB_OWNER=exampleGitHubUserName
 

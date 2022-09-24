@@ -10,16 +10,21 @@ const app = new cdk.App();
 
 switch(stackConfig.cdkStack){
 
-    case 'StrappedPipeline':
-        new StrappedPipelineStack(app, `StrappedPipeline-${stackConfig.branch}`, stackConfig);
+    case `${stackConfig.stackName}Pipeline`:
+        new StrappedPipelineStack(app, `${stackConfig.stackName}Pipeline-${stackConfig.branch}`, stackConfig);
         break;
 
-    case 'StrappedBackend':
-        new StrappedBackendStack(app,`StrappedBackend-${stackConfig.branch}`,stackConfig);
+    case `${stackConfig.stackName}Backend`:
+        new StrappedBackendStack(app,`${stackConfig.stackName}Backend-${stackConfig.branch}`,{
+            apiDomain:stackConfig.apiDomain,
+            emailAddress:stackConfig.emailAddress,
+        });
         break;
 
-    case 'StrappedFrontend':
-        new StrappedFrontendStack(app,`StrappedFrontend-${stackConfig.branch}`,stackConfig);
+    case `${stackConfig.stackName}Frontend`:
+        new StrappedFrontendStack(app,`${stackConfig.stackName}Frontend-${stackConfig.branch}`,{
+            frontendDomain:stackConfig.frontendDomain
+        });
         break;
 
     default:
