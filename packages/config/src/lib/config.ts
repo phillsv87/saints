@@ -44,7 +44,7 @@ export const stackConfig:Readonly<StackConfig>=Object.freeze({
     awsRegion:requireVar('awsRegion',process.env.NX_AWS_REGION),
     enableFrontend:requireVar('enableFrontend',process.env.NX_ENABLE_FRONTEND,'false')==='true',
     enableBackend:requireVar('enableBackend',process.env.NX_ENABLE_BACKEND,'false')==='true',
-    cdkStack:requireVar('cdkStack',process.env.NX_CDK_STACK,'StrappedPipeline'),
+    cdkStack:requireVar('cdkStack',process.env.NX_CDK_STACK,'pipeline'),
 });
 
 
