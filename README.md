@@ -86,4 +86,4 @@ domains to their corresponding aws domains.
 
 ## Pipeline Initialization
 To initialization the pipeline for the current branch run **( scripts/create-pipeline-for-branch.sh )**.
-Once initialized pushes to the branch will be automatically deployed.
+Once initialized pushes to the branch will be automatically deployed
