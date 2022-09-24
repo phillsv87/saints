@@ -8,26 +8,26 @@ import { StrappedFrontendStack, StrappedFrontendStackProps } from './StrappedFro
 export type StrappedPipelineStackProps= StackConfig & cdk.StackProps;
 
 export class StrappedPipelineStack extends cdk.Stack {
-    constructor(scope: Construct, id: string, props: StrappedPipelineStackProps) {
+    constructor(scope: Construct, id: string, {
+        stackName,
+        githubOwner,
+        gitRepo,
+        branch,
+        repoConnectionArn,
+        apiDomain,
+        emailAddress,
+        frontendDomain,
+        enableBackend,
+        enableFrontend,
+        ...props
+    }: StrappedPipelineStackProps) {
         super(scope, id, props);
-
-        const {
-            githubOwner,
-            gitRepo,
-            branch,
-            repoConnectionArn,
-            apiDomain,
-            emailAddress,
-            frontendDomain,
-            enableBackend,
-            enableFrontend,
-        }=props;
 
         const source=pipelines.CodePipelineSource.connection(`${githubOwner}/${gitRepo}`,branch,{
             connectionArn:repoConnectionArn
         });
 
-        const pipeline = new pipelines.CodePipeline(this, `StrappedPipeline-${branch}`, {
+        const pipeline = new pipelines.CodePipeline(this, `${stackName}Pipeline-${branch}`, {
 
             // How it will be built and synthesized
             synth: new pipelines.ShellStep('Synth', {
@@ -42,7 +42,8 @@ export class StrappedPipelineStack extends cdk.Stack {
         });
 
         if(enableBackend){
-            pipeline.addStage(new StrappedBackendStage(this,`StrappedBackendStage-${branch}`,{
+            pipeline.addStage(new StrappedBackendStage(this,`${stackName}BackendStage-${branch}`,{
+                stackName,
                 branch,
                 emailAddress,
                 apiDomain
@@ -50,7 +51,8 @@ export class StrappedPipelineStack extends cdk.Stack {
         }
 
         if(enableFrontend){
-            pipeline.addStage(new StrappedFrontendStage(this,`StrappedFrontendStage-${branch}`,{
+            pipeline.addStage(new StrappedFrontendStage(this,`${stackName}FrontendStage-${branch}`,{
+                stackName,
                 branch,
                 frontendDomain
             }));
@@ -62,19 +64,21 @@ export class StrappedPipelineStack extends cdk.Stack {
 interface EnvStageProps
 {
     branch:string;
+    stackName:string;
 }
 
 class StrappedBackendStage extends cdk.Stage
 {
 
     constructor(scope:Construct, id:string, {
+        stackName,
         branch,
         ...props
     }:EnvStageProps & StrappedBackendStageProps & cdk.StageProps){
 
         super(scope,id,props);
 
-        new StrappedBackendStack(this,`StrappedBackend-${branch}`,props);
+        new StrappedBackendStack(this,`${stackName}Backend-${branch}`,props);
     }
 
 }
@@ -83,13 +87,14 @@ class StrappedFrontendStage extends cdk.Stage
 {
 
     constructor(scope:Construct, id:string, {
+        stackName,
         branch,
         ...props
     }:EnvStageProps & StrappedFrontendStackProps & cdk.StageProps){
 
         super(scope,id,props);
 
-        new StrappedFrontendStack(this,`StrappedFrontend-${branch}`,props);
+        new StrappedFrontendStack(this,`${stackName}Frontend-${branch}`,props);
     }
 
 }
