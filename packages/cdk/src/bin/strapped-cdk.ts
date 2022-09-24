@@ -18,6 +18,8 @@ switch(stackConfig.cdkStack){
         new StrappedBackendStack(app,`${stackConfig.stackName}Backend-${stackConfig.branch}`,{
             apiDomain:stackConfig.apiDomain,
             emailAddress:stackConfig.emailAddress,
+            instanceVCpu:stackConfig.instanceVCpu,
+            instanceMemoryMb:stackConfig.instanceMemoryMb,
         });
         break;
 

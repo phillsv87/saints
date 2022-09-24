@@ -13,6 +13,8 @@ export interface StackConfig
     enableFrontend:boolean;
     enableBackend:boolean;
     cdkStack:string;
+    instanceVCpu:number;
+    instanceMemoryMb:number;
 
 }
 
@@ -30,6 +32,31 @@ const requireVar=<T extends keyof StackConfig>(key:T,value:string|undefined,defa
     return defaultValue;
 }
 
+const toInt=(value:string):number=>{
+    const num=parseInt(value);
+    if(!Number.isFinite(num)){
+        throw new Error(`value is not a number - ${value}`)
+    }
+    return num;
+}
+
+const toBool=(value:string):boolean=>{
+    switch(value.toLowerCase()){
+        case 'true':
+        case '1':
+        case 'yes':
+            return true;
+
+        case 'false':
+        case '0':
+        case 'no':
+            return false;
+
+        default:
+            throw new Error('Boolean value required. Value must be ( true, false, yes, no, 1 or 0 )');
+    }
+}
+
 
 export const stackConfig:Readonly<StackConfig>=Object.freeze({
     stackName:requireVar('stackName',process.env.NX_STACK_NAME),
@@ -42,9 +69,11 @@ export const stackConfig:Readonly<StackConfig>=Object.freeze({
     emailAddress:requireVar('emailAddress',process.env.NX_EMAIL_ADDRESS),
     awsProfile:requireVar('awsProfile',process.env.NX_AWS_PROFILE),
     awsRegion:requireVar('awsRegion',process.env.NX_AWS_REGION),
-    enableFrontend:requireVar('enableFrontend',process.env.NX_ENABLE_FRONTEND,'false')==='true',
-    enableBackend:requireVar('enableBackend',process.env.NX_ENABLE_BACKEND,'false')==='true',
+    enableFrontend:toBool(requireVar('enableFrontend',process.env.NX_ENABLE_FRONTEND,'false')),
+    enableBackend:toBool(requireVar('enableBackend',process.env.NX_ENABLE_BACKEND,'false')),
     cdkStack:requireVar('cdkStack',process.env.NX_CDK_STACK,'pipeline'),
+    instanceVCpu:toInt(requireVar('instanceVCpu',process.env.NX_INSTANCE_V_CPU,'256')),
+    instanceMemoryMb:toInt(requireVar('instanceMemoryMb',process.env.NX_INSTANCE_MEMORY_MB,'1024')),
 });
 
 
