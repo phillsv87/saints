@@ -22,16 +22,16 @@
             "executor": "@nrwl/next:server",
             "defaultConfiguration": "development",
             "options": {
-                "buildTarget": "frontend:build",
+                "buildTarget": "frontend:pre-build",
                 "dev": true
             },
             "configurations": {
                 "development": {
-                    "buildTarget": "frontend:build:development",
+                    "buildTarget": "frontend:pre-build:development",
                     "dev": true
                 },
                 "production": {
-                    "buildTarget": "frontend:build:production",
+                    "buildTarget": "frontend:pre-build:production",
                     "dev": false
                 }
             }
