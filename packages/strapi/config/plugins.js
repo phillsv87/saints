@@ -1,5 +1,11 @@
 module.exports =  ({ env }) => {
   const config={};
+  
+  upload: {
+    config: {
+      sizeLimit: 250 * 1024 * 1024 * 1024 // 256gb in bytes
+    }
+  }
 
   const bucket=env('AWS_BUCKET');
   if(bucket){
