@@ -37,11 +37,7 @@ export function getNextProject(activep: Project, projects: Project[]) {
 
 export function getPrevProject(activep: Project, projects: Project[]) {
 	var result;
-	console.log("previous projects: " + projects)
-	console.log("prev/current index: " + findProjectInList(activep, projects))
-	console.log("previous index: " + findProjectInList(activep, projects)-1)
-	
-	console.log("previous results: " + projects[(findProjectInList(activep, projects)-1)])
+
 	if (result = projects[(findProjectInList(activep, projects)-1)]) {
 		console.log("previous " + result);	
 		return result;
@@ -72,7 +68,7 @@ export default function WorkNavigator({
 			  }
 		  </div>
 	  
-   	  <div className={styles.nextProject} className={styles.rightAlign}>
+   	  <div className={styles.nextProject}>
 		     {nextProject &&
 				  <div>
 				  		<h5>Next case</h5>

@@ -7,7 +7,6 @@ interface NavBarProps {
 }
 
 export default function NavBar({
-  data
 }: NavBarProps) {
   return (
 		<div id="header">

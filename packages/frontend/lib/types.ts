@@ -12,7 +12,7 @@ export interface Project {
   slug: string;
   pullquote: string;  
   breadcrumbs: string;  
-  images?: Image[];
+  images?: ProjectImage[];
 }
 
 export interface ProjectImage {
@@ -27,4 +27,45 @@ export interface ProjectImage {
 	size?:number;
 	url?:string;
 	previewUrl?:string;
+}
+
+export interface RecordArray<T>
+{
+    data?:Record<T>[];
+}
+
+export interface Record<T>
+{
+    id:number;
+    attributes?:Omit<T,'id'>;
+}
+
+
+export const apiRecordsToArray=<T>(records:RecordArray<T>|null|undefined):T[]=>{
+    if(!records?.data){
+        return [];
+    }
+
+    const ary:T[]=[];
+
+    for(const d of records.data){
+        const atts=d.attributes as any;
+        if(atts){
+            if(atts.id===undefined){
+                atts.id=d.id;
+            }
+            for(const prop in atts){
+                let value=atts[prop];					 
+
+                if(value===undefined){
+                    delete atts[prop];
+                }else{
+                    atts[prop]=value;
+                }
+            }
+            ary.push(atts);
+        }
+    }
+
+    return ary;
 }
