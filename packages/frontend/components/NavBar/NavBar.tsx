@@ -6,7 +6,7 @@ import styles from './NavBar.module.css';
 interface NavBarProps {
 }
 
-export default function Gallery({
+export default function NavBar({
   data
 }: NavBarProps) {
   return (
