@@ -7,7 +7,6 @@ interface FooterProps {
 }
 
 export default function Footer({
-  data
 }: FooterProps) {
   return (
 	  <div className={styles.container}>
