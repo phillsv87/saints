@@ -8,7 +8,7 @@ interface FooterProps {
 
 export default function Footer({
   data
-}: GalleryProps) {
+}: FooterProps) {
   return (
 	  <div className={styles.container}>
 			<div id="contact">								
