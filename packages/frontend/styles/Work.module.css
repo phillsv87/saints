@@ -1,0 +1,40 @@
+.workContainer {
+	margin-left: 5vw;
+	margin-right: 5vw;
+}
+
+@media (max-width: 600px) {
+
+}
+
+
+.workContainer {}
+	
+
+.breadcrumbs {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
+	
+	color: #090909;
+	
+	font-size: 1.275vw;
+	margin-top:2vw;
+}
+
+.title {
+	font-family: 'Playfair Display', serif;
+	font-weight: 600;		
+	
+	font-size: 3.5vw;	
+	line-height: 1.36;
+}
+
+.subtitle {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 500;
+	
+	font-size: 2.8vw;	
+	line-height: 0.9;
+	
+	margin-bottom:10vw;
+}

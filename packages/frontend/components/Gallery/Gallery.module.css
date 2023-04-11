@@ -1,0 +1,37 @@
+.container{
+	display: flex;
+	overflow: hidden;
+	height: 40vw;
+}
+
+.container img {
+	object-fit: cover;
+	padding: 0.25vw;
+}
+
+.leftSection {
+	width:34%;
+	height:40vw;	
+} 
+
+.rightSection {
+	width:66%;
+}
+
+.rightSectionTop {
+	height:20vw;	
+}
+
+.rightSectionBottom {
+	height:20vw;
+	display: flex;
+	flex-direction:row;
+}
+
+.rightSectionBottomLeft {
+	width:50%;
+}
+
+.rightSectionBottomRight {
+	width:50%;
+}

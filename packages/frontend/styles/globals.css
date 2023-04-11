@@ -1,0 +1,571 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600;800&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul, li {
+	padding:0;
+	margin:0;
+}
+
+/* Typography */
+
+#header .navLinks a {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
+}
+
+h2 {
+	font-family: 'Playfair Display', serif;
+	font-weight: 800;	
+}
+
+h3 {
+	font-family: 'Playfair Display', serif;
+	font-weight: 600;	
+}
+
+p {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
+}
+
+em {
+	font-family: 'Playfair Display', serif;
+	font-weight: 800;
+	font-style: normal;
+	color: #FE0000;
+}
+
+#our-work .our-playgrounds {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
+}
+
+#services .serviceCategory {
+	font-family: 'Playfair Display', serif;
+	font-weight: 600;
+}
+
+#services .serviceName {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
+}
+
+#contact p {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 700;
+}
+
+#contact .officeTitle {
+	font-family: 'Playfair Display', serif;
+	font-weight: 600;		
+}
+
+#contact .officeAddress, #contact .officePhone, #contact .officeEmail {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 500;
+}
+
+#footer p {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 500;
+}
+
+
+/* Font sizes */
+
+#about h2, #services h2, #about p, #services p {
+	font-size: 3.5vw;	
+	line-height: 1.36;
+}
+
+#our-work h2 {	
+	font-size: 2.0vw;
+	line-height: 2.35;
+}
+
+#our-work p {			
+	font-size: 2.55vw;	
+}
+
+#our-work .our-playgrounds {		
+	font-size: 1.275vw;
+}
+
+#footer p {	
+	font-size: 1.0175vw;	
+	letter-spacing: 0.03em;
+}
+
+/* Section heights */
+
+#header, #footer {
+	height:10vh;	
+}
+
+#hero .video-container {
+	width: 100%;	
+   height: 100vh;
+	
+	overflow: hidden;
+}
+
+#about, #services, #contact {
+	min-height: 100vh;	
+}
+
+#our-work {
+	min-height: 100vh;
+}
+
+#clients {
+	height: 25vh;
+}
+
+/* General styling */
+
+#about, #our-work, #services {
+	border-bottom:1px solid #000;
+}
+
+#header {
+	display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+#header, .imageParade, #footer {
+	width:90%;
+	margin:0 auto;
+}
+
+#header ul.navLinks, 
+#clients ul.imageParade {
+	padding:0;
+	list-style-type:none;
+	display:flex;
+	justify-content:space-between;
+	text-transform: uppercase;
+}
+
+#about, #services, #contact {
+	display:flex;
+	flex-basis:auto;
+}
+
+#about .section, #services .section, #contact .section {
+	display: flex;
+}
+
+/* Header */
+
+#header .logo {
+	height: 5vh;
+}
+
+#header .navLinks {
+	display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+#header ul.navLinks li {
+	margin-left:3em;
+}
+
+#header .navLinks a:hover {
+	text-shadow: 0px 0px 1px black; /* Bold the header links on hover*/
+}
+
+/* Hero section */
+
+#hero .video-container {
+	min-width:100%;
+   display:block;
+	overflow:hidden;
+}
+
+#hero video {
+   object-fit: cover;
+   width:100%;
+   height:100vh;
+}
+
+
+/* About section */
+
+#about .section:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+#about .label h2, #services .label h2 {
+  transform: rotate(-90deg);	
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+}
+
+#about .content {
+  padding: 0.5em;
+}
+
+
+/* Our work section */
+
+#our-work {
+	display: flex;
+	flex-direction: column;
+}
+
+#our-work .content {
+	display: flex;
+	flex-direction: column;
+	
+	justify-content: center;
+	align-items: center;
+}
+
+#our-work h2, #our-work p, #our-work .our-playgrounds {
+	text-align:center;
+}
+
+#our-work p {
+	max-width: 60%;
+	margin-top: 0;
+}
+
+#our-work .projects {
+	display: flex;
+	flex-direction: row;
+
+   flex-wrap: wrap;
+   width: 100%;
+	
+	margin-top: 15vh;
+	margin-bottom: 5vh;
+}
+
+
+#our-work .projects ul, #our-work .projects li {
+	margin:0;
+	padding:0;
+}
+
+#our-work .projects ul {
+	list-style-type: none;	
+	flex: 33.33%;
+}
+
+#our-work .projects ul li {
+	list-style-type: none;
+	text-align: center;
+	
+	margin-top: 3em;
+}
+
+#our-work .projects img {
+	width: 80%;
+   height: auto;
+}
+
+
+#our-work .projects .secondColumn {
+	margin-top: 20vh;
+}
+
+#our-work .projects .thirdColumn {
+	margin-top: 10vh;
+}
+
+/* Services section */
+
+#services .right-column .content {
+	display: flex;
+}
+
+#services .serviceCategory {
+	padding-bottom: 1em;
+}
+
+#services .topPadding {
+	padding-top: 1em;
+}
+
+#services ul {
+	list-style-type:none;
+}
+
+/* Clients logo parade */
+
+#clients {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#clients ul.imageParade li {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#clients ul.imageParade li img {
+	max-height: 5vh;
+	max-width: 10vw;
+	width: auto;
+}
+
+
+/* Contact section */
+
+#contact a {
+	text-decoration: underline;
+}
+
+#contact #offices {
+	list-style-type: none;
+}
+
+#contact #offices div {
+	margin-bottom:1em;	
+}
+
+
+@media (max-width: 641px) {
+	#header .navLinks {
+		display: none;
+	}
+}
+
+@media (max-width: 1024px) {
+
+	#header .navLinks li {
+		display:none;
+	}
+
+	#contact .left-column {
+		height: 50vh;
+		justify-content: center;
+		align-items: center;
+		border-bottom: 1px solid #000;				
+	}
+	
+	#contact .right-column .content {
+		flex-basis: 100%;	
+	}
+	
+	#contact #offices {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;		
+	}
+	
+	#contact #offices li {
+		min-height: 50vh;
+		border-bottom: 1px solid #000;
+		padding-top: 1em;
+		padding-bottom: 1em;
+		padding-left:10%;
+		width: 100%;
+		
+		display: flex;
+		justify-content: center;
+		align-items: left;
+		flex-direction:column;
+	}
+	
+	#services .serviceCategory {	
+		font-size: 3.5vw;
+	}
+	
+	#contact h3 {
+		/*font-size: 18.3pt;*/
+	
+		font-size: 4.2w;		
+		letter-spacing: 0.03em;
+		text-align:center;
+	}
+
+	#contact p {
+		font-size: 5.0vw;
+	}
+
+	#contact .officeTitle {	
+		font-size: 5.0vw;	
+	}
+
+	#contact .officeAddress, #contact .officePhone, #contact .officeEmail {	
+		font-size: 3.36vw;
+	}
+	
+	#services .content ul {
+		margin-bottom:5vh;
+	}	
+	
+	#services .firstServiceCategory {
+		border-bottom: 1px solid #000;
+	}
+
+	#services .serviceName {
+		font-size: 3.36vw;
+		line-height: 2;
+	}
+	
+	#header .navLinks {
+		display:none;		
+	}
+	
+	#about .left-column, #services .left-column {
+		padding-top:5em;
+		justify-content: left;
+	}
+	
+	#about .right-column, #services .right-column {
+		align-items:center;
+		justify-content: center;
+	}
+	
+	#services .right-column {
+		flex:90;
+	}
+		
+	#contact {
+		flex-direction:column;
+	}	
+	
+	#contact #offices div.officeTitle {
+		margin-bottom:1em;
+	}
+	
+	#services .right-column .content {
+		flex-direction: column;		
+	}
+}
+
+
+@media (min-width: 1025px) {
+
+	#header .navLinks a {
+		font-size: 0.897vw;
+		line-height: 1;
+		letter-spacing: 0.08em;
+	}
+
+	#contact {
+		height: 100vh;	
+	}
+	
+	#services .serviceCategory {	
+		font-size: 1.525vw;
+	}
+
+	#services .serviceName {
+		font-size: 1.025vw;
+		line-height: 3;
+	}
+	
+	#contact h3 {	
+		font-size: 1.525vw;		
+		letter-spacing: 0.03em;	
+	}
+
+	#contact p {	
+		font-size: 3.5vw;
+	}
+
+	#contact .officeTitle {	
+		font-size: 1.525vw;	
+	}
+
+	#contact .officeAddress, #contact .officePhone, #contact .officeEmail {	
+		font-size: 1.025vw;
+	}
+		
+	#header .navLinks {
+		display:show;		
+	}
+	
+	#about, #services, #contact {
+		flex-direction:row;
+	}	
+	
+	#about .section, #services .section, #contact .section {
+		justify-content: center;
+		align-items: center;
+	}
+
+	#about .left-column, #services .left-column, #contact .left-column {
+		border-right:1px solid #000;	
+	}
+
+	#about .left-column, #services .left-column {
+		flex:10;
+	}
+
+	#about .right-column, #services .right-column {
+		flex:90;
+	}
+
+	#about .right-column .content {
+		flex-basis: 75%;
+	}
+
+	#services .right-column .content {
+		
+	}
+
+	#services .serviceCategory {
+		border-bottom: 1px solid #000;
+	}
+
+	#services ul {
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 0em;
+		padding-right: 0em;
+	}
+
+	#services ul.paddedList li {
+		padding-left: 15vh;
+		padding-right: 15vh;
+	}
+	
+	#contact {
+		border-top: 1px solid #000;
+		
+		border-bottom: 1px solid #000;
+	}
+	
+	#contact .notFirstOffice {
+		margin-top: 5em;		
+	}
+
+	#contact .left-column {
+		flex:75;
+	}
+
+	#contact .right-column {
+		flex:25;
+	}
+	
+	#contact #offices div.officeTitle {
+		margin-bottom:2em;
+	}
+}
