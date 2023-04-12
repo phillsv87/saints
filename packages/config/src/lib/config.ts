@@ -7,6 +7,7 @@ export interface StackConfig
     repoConnectionArn:string;
     apiDomain:string;
     frontendDomain:string;
+    coachMeDomain:string;
     emailAddress:string;
     awsProfile:string;
     awsRegion:string;
@@ -66,6 +67,7 @@ export const stackConfig:Readonly<StackConfig>=Object.freeze({
     repoConnectionArn:requireVar('repoConnectionArn',process.env.NX_REPO_CONNECTION_ARN),
     apiDomain:requireVar('apiDomain',process.env.NX_API_DOMAIN),
     frontendDomain:requireVar('frontendDomain',process.env.NX_FRONTEND_DOMAIN),
+    coachMeDomain:requireVar('coachMeDomain',process.env.NX_COACH_ME_DOMAIN),
     emailAddress:requireVar('emailAddress',process.env.NX_EMAIL_ADDRESS),
     awsProfile:requireVar('awsProfile',process.env.NX_AWS_PROFILE),
     awsRegion:requireVar('awsRegion',process.env.NX_AWS_REGION),
