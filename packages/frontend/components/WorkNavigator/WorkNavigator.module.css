@@ -1,0 +1,40 @@
+.container{
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+	align-items:center;
+	
+	width:90%;
+	margin:0 auto;
+	
+	height: 40vh ;
+}
+
+.container h5 {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
+	
+	font-size: 1.275vw;
+}
+
+
+.prevProject {
+	flex: 1;
+}
+
+.nextProject {
+	flex: 1;
+	
+	display:flex;
+	flex-direction:column;
+	justify-content:flex-end;
+	align-items:flex-end;
+}
+
+.projectTitle {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 700;
+	
+	font-size: 3.5vw;		
+	text-decoration: underline;
+}

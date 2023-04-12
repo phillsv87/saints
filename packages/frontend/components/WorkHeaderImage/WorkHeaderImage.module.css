@@ -1,0 +1,9 @@
+.container{
+	height:30vw;
+	display: flex;
+	overflow: hidden;	
+}
+
+.container img {
+	object-fit: cover;
+}

@@ -1,0 +1,23 @@
+.container{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	
+	margin-top:5vw;
+	margin-bottom:5vw;
+}
+
+hr.pullquote {
+	width:33%;
+}
+
+p.pullquote {
+	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
+	
+	font-size: 1.275vw;
+	margin-top:5vw;
+	margin-bottom:5vw;
+	width:66%;
+}
