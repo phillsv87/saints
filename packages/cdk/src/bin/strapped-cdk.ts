@@ -25,7 +25,8 @@ switch(stackConfig.cdkStack){
 
     case 'frontend':
         new StrappedFrontendStack(app,`${stackConfig.stackName}Frontend-${stackConfig.branch}`,{
-            frontendDomain:stackConfig.frontendDomain
+            frontendDomain:stackConfig.frontendDomain,
+            coachMeDomain:stackConfig.coachMeDomain,
         });
         break;
 
