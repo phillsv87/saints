@@ -1,33 +1,32 @@
-import React from "react";
-import { Project, ProjectImage } from "../../lib/types";
+import { Project } from "../../lib/types";
 import styles from './WorkNavigator.module.css';
 
 interface WorkNavigatorProps {
-  projects: Project[],	
+  projects: Project[],
   activeProject: Project
 }
 
 
 export function findProjectInList(specimen: Project, projects: Project[]) {
-	var activeIndex;
-	
-	projects.map((p, index) => {
+
+	for(let i=0;i<projects.length;i++){
+        const p=projects[i];
 		console.log("   against: " + p.slug)
 		if (specimen.slug == p.slug) {
-			console.log("    bingo! " + index);
-			activeIndex = index;
-		}	
-	});
-	
-	return activeIndex;
+			console.log("    bingo! " + i);
+			return i;
+		}
+	};
+
+	return -1;
 }
 
 
 export function getNextProject(activep: Project, projects: Project[]) {
-	var result;
+	const result=projects[findProjectInList(activep, projects)+1];
 
-	if (result = projects[(findProjectInList(activep, projects)+1)]) {
-		console.log("next " + result);	
+	if (result) {
+		console.log("next " + result);
 		return result;
 	} else {
 		return false;
@@ -36,10 +35,10 @@ export function getNextProject(activep: Project, projects: Project[]) {
 
 
 export function getPrevProject(activep: Project, projects: Project[]) {
-	var result;
+	const result=projects[(findProjectInList(activep, projects)-1)]
 
-	if (result = projects[(findProjectInList(activep, projects)-1)]) {
-		console.log("previous " + result);	
+	if (result) {
+		console.log("previous " + result);
 		return result;
 	} else {
 		return false;
@@ -53,30 +52,30 @@ export default function WorkNavigator({
   projects, activeProject
 }: WorkNavigatorProps) {
 
-  var nextProject = getNextProject(activeProject, projects)
-  var prevProject = getPrevProject(activeProject, projects)
-	
+  const nextProject = getNextProject(activeProject, projects)
+  const prevProject = getPrevProject(activeProject, projects)
+
   return (
     <div className={styles.container}>
-	  
+
 		  <div className={styles.prevProject}>
 		     {prevProject &&
 				  <div>
 				  		<h5>Previous case</h5>
-						<a className={styles.projectTitle} href={'/work/' + prevProject.slug}> {prevProject.title} </a>				  
+						<a className={styles.projectTitle} href={'/work/' + prevProject.slug}> {prevProject.title} </a>
 				  </div>
 			  }
 		  </div>
-	  
+
    	  <div className={styles.nextProject}>
 		     {nextProject &&
 				  <div>
 				  		<h5>Next case</h5>
-						<a className={styles.projectTitle} href={'/work/' + nextProject.slug}> {nextProject.title} </a>				  
+						<a className={styles.projectTitle} href={'/work/' + nextProject.slug}> {nextProject.title} </a>
 				  </div>
 			  }
 		  </div>
-	  
+
 
     </div>
   )
