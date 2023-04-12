@@ -56,6 +56,6 @@
             }
         }
     },
-    "implicitDependencies": ["strapi","frontend"],
+    "implicitDependencies": ["strapi","frontend","coach-me"],
     "tags": []
 }
