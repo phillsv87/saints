@@ -1,13 +1,39 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
+import { GetStaticProps, GetStaticPaths } from 'next'
 
 import NavBar from "../components/NavBar/NavBar";
 import Footer from "../components/Footer/Footer";
+import PortfolioGallery from "../components/PortfolioGallery/PortfolioGallery";
 
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+import { getProjects } from '../lib/lib'
+import { Project, ProjectImage } from '../lib/types'
+
+export async function getStaticProps() {
+
+  const projects = await getProjects()
+		
+  return {
+    props: {
+      projects
+    }
+  }
+}
+
+
+
+interface HomeProps {
+	projects: Project[]
+}
+
+
+export default function HomePage({
+	projects,
+}:HomeProps){	
 	return (
 		<div className={styles.container}>
 			<NavBar />
@@ -46,24 +72,8 @@ const Home: NextPage = () => {
 
 					<span className="our-playgrounds">apps  /  digital  /  design  /  art  /  strategy</span>			
 					
-					<div className="projects">
-						<ul>
-							<li><img src="/img/projects/harvard-innovation-lab.png" alt="Harvard Innovation Lab" /></li>
-							<li><img src="/img/projects/liirn.png" alt="Liirn" /></li>
-							<li><img src="/img/projects/harvard-innovation-lab.png" alt="Harvard Innovation Lab" /></li>
-						</ul>
-
-						<ul className="secondColumn">
-							<li><img src="/img/projects/momo.png" alt="Momo Nest Homes" /></li>
-							<li><img src="/img/projects/liirn.png" alt="Liirn" /></li>
-							<li><img src="/img/projects/momo.png" alt="Momo Nest Homes" /></li>
-						</ul>
-
-						<ul className="thirdColumn">
-							<li><img src="/img/projects/puma.png" alt="Puma" /></li>
-							<li><img src="/img/projects/wlth.png" alt="WLTH" /></li>
-							<li><img src="/img/projects/puma.png" alt="Puma" /></li>
-						</ul>					
+					<div className="projects">						
+						<PortfolioGallery projects={projects} />
 					</div>		
 				</div>
 				
@@ -125,5 +135,3 @@ const Home: NextPage = () => {
 		</div>
   )
 }
-
-export default Home

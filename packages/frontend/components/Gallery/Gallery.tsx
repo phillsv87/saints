@@ -21,27 +21,42 @@ export default function Gallery({
 	    <div className={styles.rightSection}>				  				  
 	       <div className={styles.rightSectionTop}>			
   	    		<img src={images[2].url} 
-	    		  width="100%" 
-	    		  height="100%"
+	    		     width="100%" 
+	    		     height="100%"
   	    			  alt={images[2].name} />
 	    	</div>
 	    			  
 	       <div className={styles.rightSectionBottom}>
-	    		<div className={styles.rightSectionBottomLeft}>
-	      			<img src={images[3].url} 
-	    		  width="100%" 
-	    		  height="100%"
-	      				  alt={images[3].name} />
-	    			  
-	    	    </div>
-	    				  
+				{!images[4] && 
+	    			<img src={images[3].url} 
+	  		  			  width="100%" 
+	  		  			  height="100%"
+	    				  alt={images[3].name} />
+				}
+				
+				
+				
+			
+				 {images[4] && 	  
+		    		<div className={styles.rightSectionBottomLeft}>
+		    			<img src={images[3].url} 
+		  		  			  width="100%" 
+		  		  			  height="100%"
+		    				  alt={images[3].name} />
+ 			  
+		    	    </div>
+				}
+
+	    		
+				 {images[4] && 	  
  	    			 <div className={styles.rightSectionBottomRight}>
 	    	  			<img src={images[4].url} 
-	    		  width="100%" 
-	    		  height="100%"
+	    		  			  width="100%" 
+	    		  			  height="100%"
 	    	  				  alt={images[4].name} />
 	    		   
  	    		    </div>
+				  }
 	       </div>
 	    </div>
     </div>

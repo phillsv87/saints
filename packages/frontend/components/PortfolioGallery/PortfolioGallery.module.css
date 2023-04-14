@@ -1,0 +1,7 @@
+.container{
+	display: flex;
+}
+
+.container img {
+	height:20vh;
+}
