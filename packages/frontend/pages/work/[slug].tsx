@@ -12,12 +12,12 @@ import PullQuote from "../../components/PullQuote/PullQuote"
 import WorkHeaderImage from "../../components/WorkHeaderImage/WorkHeaderImage"
 import WorkNavigator from "../../components/WorkNavigator/WorkNavigator"
 
-import { Project, ProjectImage } from '../../lib/types'
 import { getProjects } from '../../lib/lib'
+import { Project } from '../../lib/types'
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     return {
-        paths: [], //indicates that no page needs be created at build time
+        paths: (await getProjects()).map(v=>`/work/${v.slug}`),
         fallback: 'blocking' //indicates the type of fallback
     }
 }
@@ -33,7 +33,7 @@ interface WorkProps {
 export async function getStaticProps() {
 
   const projects = await getProjects()
-	
+
   return {
     props: {
       projects
