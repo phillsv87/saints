@@ -1,16 +1,25 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/strapi/src",
-  "projectType": "application",
-  "targets": {
-    "build": {
-      "executor": "nx:run-commands",
-      "outputs": ["dist/packages/strapi"],
-      "options": {
-        "cwd": "packages/strapi",
-        "command": "ls -lh"
-      }
-    }
-  },
-  "tags": []
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/strapi/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "nx:run-commands",
+            "outputs": [
+                "dist/packages/strapi"
+            ],
+            "options": {
+                "cwd": "packages/strapi",
+                "command": "ls -lh"
+            }
+        },
+        "serve": {
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "packages/strapi",
+                "command": "npm run strapi develop"
+            }
+        }
+    },
+    "tags": []
 }
