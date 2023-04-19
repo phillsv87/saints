@@ -1,0 +1,28 @@
+html {
+    -webkit-text-size-adjust: 100%;
+	 font-family: 'Raleway', sans-serif;
+    line-height: 0.9;
+    tab-size: 4;
+    scroll-behavior: smooth;
+}
+body {
+    font-family: inherit;
+    line-height: inherit;
+    margin: 0;
+	 background-color:#000;
+	 
+}
+h1,
+h2,
+p,
+pre {
+    margin: 0;
+}
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: currentColor;
+}
