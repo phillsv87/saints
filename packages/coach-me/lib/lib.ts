@@ -22,12 +22,15 @@ export async function getCoaches() {
      c => ({
        firstName: c?.attributes?.firstName,
 		 lastName: c?.attributes?.lastName,
+		 calendly: c?.attributes?.calendly,		 
 		 slug: c?.attributes?.slug,
  	    url: "/" + c?.attributes?.slug,
 	    headline: c?.attributes?.headline,
 	    callToActionHTML: c?.attributes?.callToActionHTML,
 		 biographySubjectHTML: c?.attributes?.biographySubjectHTML,
 	    biographyBodyHTML: c?.attributes?.biographyBodyHTML,
+	    getStartedSubjectHTML: c?.attributes?.getStartedSubjectHTML,		 
+		 getStartedContentHTML: c?.attributes?.getStartedContentHTML,
 		 profilePicture: {
 	      name: c?.attributes?.profilePicture?.data?.attributes?.name,
 	      alternativeText:c?.attributes?.profilePicture?.data?.attributes?.alternativeText,

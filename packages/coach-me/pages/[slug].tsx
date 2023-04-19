@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { GetStaticPaths } from 'next'
 
 import Header from '../Components/Header/Header'
+import Footer from '../Components/Footer/Footer'
 import Signup from '../Components/Signup/Signup'
 
 import { getCoaches } from '../lib/lib'
@@ -51,7 +52,7 @@ export default function CoachLandingPage({
     return (
         <div className={styles.container}>
 		 
-		 		<Header />
+		 		<Header coach={activeCoach!} />
 		 		
 				<div className={styles.headlineContainer}>
 					<h1 className={styles.headline}>{activeCoach?.headline}</h1>
@@ -64,12 +65,21 @@ export default function CoachLandingPage({
 					    <source src={activeCoach?.profileVideo?.url} type="video/mp4" />
 			 	   </video>
 			   </div>
-
 		 
 		 		<div className={styles.getStartedContainer}>
-		 			<Signup />
+					 <div className={styles.getStartedSubject}
+					       dangerouslySetInnerHTML={{__html: activeCoach?.getStartedSubjectHTML!}} />
+		 
+					 <div className={styles.getStartedContent}
+					       dangerouslySetInnerHTML={{__html: activeCoach?.getStartedContentHTML!}} />
+					 
+
 				</div>
 		 
+		  		<div className={styles.signupContainer}>
+				   <a className={styles.signupButton} href={activeCoach?.calendly!}>SIGN UP FREE</a>
+		 		</div>
+					 
 			 	<div className={styles.biographyContainer}>
 		 			<div className={styles.coachProfilePicture}>
 						<img className={styles.profilePicture} src={activeCoach?.profilePicture?.url} />		 				
@@ -84,7 +94,8 @@ export default function CoachLandingPage({
 		 		   </div>
 		 		</div>
 		 
-
+		 		<Footer />
+			
         </div>
     )
 }

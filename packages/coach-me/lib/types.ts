@@ -4,6 +4,9 @@ export interface CoachJson {
 	attributes: {
 	   firstName: string;
 	   lastName: string;
+		slug: string;
+		email: string;
+		calendly: string;		
 	   profilePicture: {
 			data: {
 				attributes: {
@@ -43,13 +46,16 @@ export interface CoachJson {
 		callToActionHTML: string;
 	   biographySubjectHTML: string;		
 		biographyBodyHTML: string;
-		slug: string;
+	   getStartedSubjectHTML: string;
+	   getStartedContentHTML: string;
 	}
 }
 
 export interface Coach {
   firstName: string;
   lastName: string;
+  email: string;
+  calendly: string;  
   slug: string;
   url: string;
   profilePicture: {
@@ -83,4 +89,6 @@ export interface Coach {
   callToActionHTML: string;
   biographySubjectHTML: string;
   biographyBodyHTML: string;
+  getStartedSubjectHTML: string;
+  getStartedContentHTML: string;
 }
