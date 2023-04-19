@@ -1,0 +1,24 @@
+.signupButton {
+	background-color:#FFF;
+	color:#000;
+	
+	text-decoration:none;
+	
+	padding:1em;
+	border-radius:1em;
+	
+	font-size: 2vh;
+	font-weight:800;
+}
+
+.signupButton:hover {
+	background-color:#9A9A9A;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items:center;
+	min-height: 20vh;	
+}

@@ -1,13 +1,91 @@
-.app {
-	background-color:#000;
-	margin:0;	
-	padding:0;
-	width:100%;
-}
-
 .container {
+	width:80%;
+	margin:0 auto;
+	color:#FFF;
 }
 
 .profilePicture {
 	
+}
+
+.headline {
+	color:#FFF;
+	font-family:sans-serif;
+}
+
+.videoContainer {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.video {
+	width:100%;
+	
+	display:flex;
+	align-items:center;
+	justify-content:center;
+
+}
+
+.coachBio {
+	display:flex;
+	flex-direction:columns;
+}
+
+.coachProfilePicture, .coachBiography {
+	flex-basis:50%;
+	overflow:hidden;
+}
+
+.coachBioSubject {
+	margin-bottom:1em;
+}
+
+.coachBiography {
+	margin-left: 1em;
+	margin-right:1em;
+}
+
+.profilePicture {
+	max-width:100%;
+}
+
+.headlineContainer {
+	min-height:30vh;
+	
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.biographyContainer {
+	min-height: 75vh;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.getStartedContainer {
+	min-height: 50vh;
+	
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+/* Typograph */
+
+.headline {
+	font-size: 8vh;
+	font-weight:800;	
+}
+
+.coachBioSubject {
+	font-size: 3.8vh;
+	font-weight:800;
+}
+
+.coachBioCopy {
+	font-size: 2.5vh;
 }

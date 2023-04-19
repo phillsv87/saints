@@ -4,6 +4,9 @@ import { useRouter } from 'next/router'
 
 import { GetStaticPaths } from 'next'
 
+import Header from '../Components/Header/Header'
+import Signup from '../Components/Signup/Signup'
+
 import { getCoaches } from '../lib/lib'
 import { Coach } from '../lib/types'
 
@@ -47,14 +50,41 @@ export default function CoachLandingPage({
 	
     return (
         <div className={styles.container}>
-            <h1>{activeCoach?.headline}</h1>
 		 
-		      <img className={styles.profilePicture} src={activeCoach?.profilePicture?.url} />
+		 		<Header />
+		 		
+				<div className={styles.headlineContainer}>
+					<h1 className={styles.headline}>{activeCoach?.headline}</h1>
+		 		</div>
 		 
-				<video
-		 		 controls>
-				    <source src={activeCoach?.profileVideo?.url} type="video/mp4" />
-		 	   </video>
+		 		<div className={styles.videoContainer}>
+					<video
+			 		 controls
+			 		 className={styles.video}>
+					    <source src={activeCoach?.profileVideo?.url} type="video/mp4" />
+			 	   </video>
+			   </div>
+
+		 
+		 		<div className={styles.getStartedContainer}>
+		 			<Signup />
+				</div>
+		 
+			 	<div className={styles.biographyContainer}>
+		 			<div className={styles.coachProfilePicture}>
+						<img className={styles.profilePicture} src={activeCoach?.profilePicture?.url} />		 				
+		 		   </div>
+		 			
+		 			<div className={styles.coachBiography}>		 
+						 <div className={styles.coachBioSubject}
+						       dangerouslySetInnerHTML={{__html: activeCoach?.biographySubjectHTML!}} />
+							 
+						 <div className={styles.coachBioCopy}
+						       dangerouslySetInnerHTML={{__html: activeCoach?.biographyBodyHTML!}} />
+		 		   </div>
+		 		</div>
+		 
+
         </div>
     )
 }
