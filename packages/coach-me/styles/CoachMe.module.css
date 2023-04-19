@@ -1,5 +1,4 @@
 .container {
-	width:80%;
 	margin:0 auto;
 	color:#FFF;
 }
@@ -10,7 +9,6 @@
 
 .headline {
 	color:#FFF;
-	font-family:sans-serif;
 }
 
 .videoContainer {
@@ -30,7 +28,6 @@
 
 .coachBio {
 	display:flex;
-	flex-direction:columns;
 }
 
 .coachProfilePicture, .coachBiography {
@@ -51,9 +48,7 @@
 	max-width:100%;
 }
 
-.headlineContainer {
-	min-height:30vh;
-	
+.headlineContainer {	
 	display:flex;
 	align-items:center;
 	justify-content:center;
@@ -61,7 +56,7 @@
 
 .biographyContainer {
 	margin-top:1em;
-	min-height: 75vh;
+	
 	display:flex;
 	align-items:center;
 	justify-content:center;
@@ -82,15 +77,10 @@
 }
 
 
-.getStartedContainer {
-	min-height: 35vh;
-	
+.getStartedContainer {	
 	display:flex;
 	align-items:center;
-	justify-content:center;
-	
-	flex-direction:column;
-	
+	justify-content:center;		
 	text-align:center;
 }
 
@@ -106,17 +96,109 @@
 
 /* Typograph */
 
-.headline {
-	font-size: 8vh;
-	font-weight:800;	
+
+
+
+@media only screen and (min-device-width: 1024px) {
+	.container {
+		width:80%;		
+	}
+	
+	
+	.headlineContainer, .videoContainer, .getStartedContainer, .biographyContainer {
+		padding-top:2h;
+		padding-bottom:2vh;
+	}
+	
+	.getStartedContainer, .biographyContainer{
+		flex-direction: column;
+	}
+	
+	.headline {
+		font-size: 6vh;
+		font-weight:800;	
+	}
+
+	.coachBioSubject, .getStartedSubject {
+		font-size: 3.8vw;
+		font-weight:800;
+	}
+
+	.getStartedContent, .coachBioCopy {	
+		font-size: 2.5vh;
+	}
+	
 }
 
-.coachBioSubject, .getStartedSubject {
-	font-size: 3.8vh;
-	font-weight:800;
+/* iPad [portrait + landscape] */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) {
+	.container {
+		width:98%;		
+	}
+	
+	.headlineContainer, .videoContainer, .getStartedContainer, .biographyContainer {
+		padding-top:2vh;
+		padding-bottom:2vh;
+		margin-top:2vh;
+		margin-bottom:2vh;
+	}
+	
+	.getStartedContainer, .biographyContainer {
+		flex-direction: column;
+	}
+	
+	.headline {
+		font-size: 7vw;
+		font-weight:800;	
+	}
+
+	.coachBioSubject, .getStartedSubject {
+		font-size: 7vw;
+		font-weight:800;
+	}
+
+	.getStartedContent, .coachBioCopy {	
+		font-size: 2.5vh;
+	}
+	
+	.coachProfilePicture {
+		margin-bottom:5vh;
+	}
 }
 
-.getStartedContent, .coachBioCopy {	
-	font-size: 2.5vh;
+/* iPhone [portrait + landscape] */
+@media only screen and (max-device-width: 480px) {
+	.container {
+		width:98%;		
+	}
+	
+	.headlineContainer, .videoContainer, .getStartedContainer, .biographyContainer {
+		padding-top:4vh;
+		padding-bottom:4vh;
+	}
+	
+	.getStartedContainer, .biographyContainer {
+		flex-direction: column;
+	}
+	
+	.headline {
+		font-size: 7vw;
+		font-weight:800;	
+	}
+
+	.coachBioSubject, .getStartedSubject {
+		font-size: 7vw;
+		font-weight:800;
+	}
+
+	.getStartedContent, .coachBioCopy {	
+		font-size: 2.5vh;
+	}
+	
+	.coachProfilePicture {
+		margin-bottom:5vh;
+	}
+	
 }
+
 
