@@ -4,12 +4,17 @@ import Link from 'next/link'
 import styles from './Signup.module.css';
 
 interface SignupFormProps {
+	
 }
 
 export default function Signup({
 }: SignupFormProps) {
   return (
-	  <div className={styles.signupContainer}><h1>hello</h1></div>
+	  <div className={styles.signupContainer}>
+	  
+	  
+	  
+	  </div>
   )
 }
 

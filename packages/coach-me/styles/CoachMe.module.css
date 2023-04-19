@@ -43,8 +43,8 @@
 }
 
 .coachBiography {
-	margin-left: 1em;
-	margin-right:1em;
+	margin-left: 2em;
+	margin-right:2em;
 }
 
 .profilePicture {
@@ -60,18 +60,48 @@
 }
 
 .biographyContainer {
+	margin-top:1em;
 	min-height: 75vh;
 	display:flex;
 	align-items:center;
 	justify-content:center;
 }
 
+.signupButton {
+	background-color:#FFF;
+	color:#000;
+	
+	text-decoration:none;
+	
+	padding:1em;
+	border-radius:0.25em;
+	
+	font-size: 2vh;
+	font-weight:800;
+	
+}
+
+
 .getStartedContainer {
-	min-height: 50vh;
+	min-height: 35vh;
 	
 	display:flex;
 	align-items:center;
 	justify-content:center;
+	
+	flex-direction:column;
+	
+	text-align:center;
+}
+
+.signupContainer {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.getStartedSubject {
+	margin-bottom:1em;
 }
 
 /* Typograph */
@@ -81,11 +111,12 @@
 	font-weight:800;	
 }
 
-.coachBioSubject {
+.coachBioSubject, .getStartedSubject {
 	font-size: 3.8vh;
 	font-weight:800;
 }
 
-.coachBioCopy {
+.getStartedContent, .coachBioCopy {	
 	font-size: 2.5vh;
 }
+

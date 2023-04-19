@@ -10,7 +10,7 @@ export default function Header({
 }: HeaderProps) {
   return (
 	  <div className={styles.container}>
-	  	
+	  	Copyright &copy; 2023
 	  </div>
   )
 }
