@@ -77,7 +77,7 @@ export default function CoachLandingPage({
 				</div>
 		 
 		  		<div className={styles.signupContainer}>
-				   <a className={styles.signupButton} href={activeCoach?.calendly!}>SIGN UP FREE</a>
+				   <a className={styles.signupButton} target="_blank" href={activeCoach?.calendly!}>SIGN UP FREE</a>
 		 		</div>
 					 
 			 	<div className={styles.biographyContainer}>
