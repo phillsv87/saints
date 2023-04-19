@@ -18,7 +18,7 @@ export default function Header({
 	  		<div><h1>Coach Me</h1></div>
 	  
 	  		<div>
-			   <a className={styles.signupButton} href={coach?.calendly!}>SIGN UP FREE</a>
+			   <a className={styles.signupButton} target="_blank" href={coach?.calendly!}>SIGN UP FREE</a>
 	 		</div>
 	  </div>
   )
