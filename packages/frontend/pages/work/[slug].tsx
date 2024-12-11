@@ -70,6 +70,7 @@ export default function WorkPage({
                 <div className={styles.breadcrumbs}>{ project.breadcrumbs }</div>
 
                 <h1 className={styles.title}>{ project.title }</h1>
+			
                 <h2 className={styles.subtitle}>{ project.subtitle }</h2>
 
                 <Gallery images={ project.images } />
