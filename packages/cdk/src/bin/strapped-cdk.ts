@@ -6,7 +6,7 @@ import { StrappedBackendStack } from '../lib/StrappedBackendStack';
 import { StrappedFrontendStack } from '../lib/StrappedFrontendStack';
 import { StrappedPipelineStack } from '../lib/StrappedPipelineStack';
 
-const app = new cdk.App();
+const app = new cdk.App({});
 
 switch(stackConfig.cdkStack){
 
@@ -27,6 +27,10 @@ switch(stackConfig.cdkStack){
         new StrappedFrontendStack(app,`${stackConfig.stackName}Frontend-${stackConfig.branch}`,{
             frontendDomain:stackConfig.frontendDomain,
             coachMeDomain:stackConfig.coachMeDomain,
+            env:{
+                account:process.env['NX_AWS_ACCOUNT'],
+                region:process.env['NX_AWS_REGION']
+            }
         });
         break;
 

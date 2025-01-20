@@ -18,10 +18,20 @@ export class StrappedFrontendStack extends cdk.Stack {
             nxExportedPackage:'frontend',
         })
 
-        new StaticWebSite(this,'CoachMe',{
-            domainName:props.coachMeDomain,
-            cdn:true,
-            nxExportedPackage:'coach-me',
-        })
+        // new StaticWebSite(this,'CoachMe',{
+        //     domainName:props.coachMeDomain,
+        //     cdn:true,
+        //     nxExportedPackage:'coach-me',
+        // })
+
+        // new RedirectApi(this,'Redirects',{
+        //     fallbackDomain:'www',
+        //     redirects:[
+        //         {
+        //             fromDomain:'saintsnewyork.com',
+        //             toDomain:'www.saintsnewyork.com',
+        //         }
+        //     ]
+        // })
     }
 }
